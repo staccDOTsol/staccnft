@@ -111,6 +111,7 @@ export const ArtworksView = () => {
     }
   }
   console.log(minters)
+  console.log(goodgood)
   results = resultst
   const [activeKey, setActiveKey] = useState(ArtworkViewState.Metaplex);
   const breakpointColumnsObj = {
