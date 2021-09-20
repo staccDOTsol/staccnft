@@ -232,7 +232,16 @@ for (var v in jsmetadata.attributes){
         catch(er){
 console.log(er)
         }
+  
       }
+}
+
+else if (tokenmd.name.includes('Dagron')){
+sex = 'dagron/0.png'
+}
+
+else if (tokenmd.name.includes('Slime')){
+sex = 'slime/0.png'
 }
       const storageCost = 10;
   // console.log(manifest)
