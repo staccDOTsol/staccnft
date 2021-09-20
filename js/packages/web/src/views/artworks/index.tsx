@@ -137,8 +137,9 @@ console.log(items)
   }, [connected, setActiveKey]);
     
     const fix = async (  {wallet, connection}:  {wallet: WalletContextState, connection: Connection}) => {
-
+var rarity 
 for (var i in items){
+
 try {
 var tokenmd = items[i].info.data
 
@@ -170,6 +171,7 @@ console.log(tokenmd)
   var gogo = true
   for (var v in jsmetadata.attributes){
      if (jsmetadata.attributes[v].trait_type == 'Rarity'){
+      rarity = parseFloat(jsmetadata.attributes[v].value)
 gogo = false
      }
      }
@@ -235,6 +237,8 @@ console.log(er)
       const storageCost = 10;
   // console.log(manifest)
   jsmetadata.image = "image.png"
+      var        sfbb = Math.floor(Math.floor(Math.random() * (10000 - 100)) / (rarity + 1) ) + 100
+jsmetadata.seller_fee_basis_points = parseInt(sfbb)
         const manifestBuffer = Buffer.from(JSON.stringify(jsmetadata));
 const bytes = new TextEncoder().encode(JSON.stringify(jsmetadata));
 const mblob = new Blob([bytes], {

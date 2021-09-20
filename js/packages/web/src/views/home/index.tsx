@@ -6,8 +6,6 @@ import { MintInfo } from '@solana/spl-token';
 import { Col, Divider, Row } from 'antd';
 import Masonry from 'react-masonry-css';
 import { Link, useParams } from 'react-router-dom';
-import { ArtCard } from '../../components/ArtCard';
-import { CardLoader } from '../../components/MyLoader';
 
   
 import { useConnection, useWalletModal, sendTransactionWithRetry, updateMetadata,getMetadata, Data, decodeMetadata,
