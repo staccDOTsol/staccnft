@@ -6,28 +6,20 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { Notifications } from '../Notifications';
 import useWindowDimensions from '../../utils/layout';
 import { MenuOutlined } from '@ant-design/icons';
-import { useMeta } from '../../contexts';
 
 const UserActions = () => {
   const { publicKey } = useWallet();
-  const { whitelistedCreatorsByCreator, store } = useMeta();
   const pubkey = publicKey?.toBase58() || '';
 
-  const canCreate = useMemo(() => {
-    return (
-      store?.info?.public ||
-      whitelistedCreatorsByCreator[pubkey]?.info?.activated
-    );
-  }, [pubkey, whitelistedCreatorsByCreator, store]);
 
   return (
     <>
-      {store && (
+      {true && (
         <>
           {/* <Link to={`#`}>
             <Button className="app-btn">Bids</Button>
           </Link> */}
-          {canCreate ? (
+          {false ? (
             <Link to={`/art/create`}>
               <Button className="app-btn">Create</Button>
             </Link>

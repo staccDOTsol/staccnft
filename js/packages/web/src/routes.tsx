@@ -14,7 +14,6 @@ import {
   FaqView,
   LinksView
 } from './views';
-import { AdminView } from './views/admin';
 import { BillingView } from './views/auction/billing';
   
 
@@ -24,7 +23,6 @@ export function Routes() {
       <HashRouter basename={'/'}>
         <Providers>
           <Switch>
-          <Route exact path="/admin" component={() => <AdminView />} />
             <Route
               exact
               path="/analytics"
@@ -53,7 +51,6 @@ export function Routes() {
                  return null;
             }}/>
 
-             <Route exact path="/admin" component={() => <AdminView />} />
             <Route
               exact
               path="/analytics"

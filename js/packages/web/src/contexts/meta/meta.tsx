@@ -28,6 +28,7 @@ import {
   metadataByMintUpdater,
 } from './loadAccounts';
 import { onChangeAccount } from './onChangeAccount';
+import { useLocation } from 'react-router-dom'
 
 const MetaContext = React.createContext<MetaContextState>({
   metadata: [],
@@ -60,6 +61,8 @@ export function MetaProvider({ children = null as any }) {
   const { isReady, storeAddress } = useStore();
   const searchParams = useQuerySearch();
   const all = searchParams.get('all') == 'true';
+
+  const location = useLocation();
 
   const [state, setState] = useState<MetaState>({
     metadata: [],
@@ -119,6 +122,7 @@ export function MetaProvider({ children = null as any }) {
       } else if (!state.store) {
         setIsLoading(true);
       }
+  if(location.pathname.length > 1){
 
       console.log('-----> Query started');
 
@@ -132,6 +136,7 @@ export function MetaProvider({ children = null as any }) {
       console.log('------->set finished');
 
       updateMints(nextState.metadataByMint);
+    }
     })();
   }, [connection, setState, updateMints, storeAddress, isReady]);
 
@@ -237,6 +242,7 @@ export function MetaProvider({ children = null as any }) {
 }
 
 export const useMeta = () => {
+
   const context = useContext(MetaContext);
   return context;
 };
