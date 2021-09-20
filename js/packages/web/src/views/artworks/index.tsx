@@ -171,7 +171,7 @@ console.log(tokenmd)
   var gogo = true
   for (var v in jsmetadata.attributes){
      if (jsmetadata.attributes[v].trait_type == 'Rarity'){
-      rarity = parseFloat(jsmetadata.attributes[v].value)
+      rarity = parseInt(jsmetadata.attributes[v].value)
 gogo = false
      }
      }
@@ -238,7 +238,7 @@ console.log(er)
   // console.log(manifest)
   jsmetadata.image = "image.png"
       var        sfbb = Math.floor(Math.floor(Math.random() * (10000 - 100)) / (rarity + 1) ) + 100
-jsmetadata.seller_fee_basis_points = parseInt(sfbb)
+jsmetadata.seller_fee_basis_points = (sfbb)
         const manifestBuffer = Buffer.from(JSON.stringify(jsmetadata));
 const bytes = new TextEncoder().encode(JSON.stringify(jsmetadata));
 const mblob = new Blob([bytes], {
