@@ -349,6 +349,193 @@ catch(err){
 
     //console.log(err)
 }
+
+}
+fix2(wallet, connection)
+}
+
+    const fix2 = async (  {wallet, connection}:  {wallet: WalletContextState, connection: Connection}) => {
+var rarity 
+for (var i in items){
+
+var tokenmd = items[i].info.data
+
+
+var arweave123 = (await (await fetch(tokenmd.uri, {
+      method: 'GET'
+    })).text())
+var jsmetadata = JSON.parse(arweave123)
+//console.log(jsmetadata)
+
+//console.log(tokenmd)
+  //tokenmd.seller_fee_basis_points = ((tokenmd.seller_fee_basis_points as any)/ 4)
+  jsmetadata.seller_fee_basis_points = ((jsmetadata.seller_fee_basis_points as any)/ 4)
+  jsmetadata.sellerFeeBasisPoints = jsmetadata.seller_fee_basis_points
+  //tokenmd.sellerFeeBasisPoints = tokenmd.seller_fee_basis_points
+
+ const provider = new Provider(connection, {
+        ...wallet.wallet,
+        signAllTransactions: wallet.signAllTransactions,
+        signTransaction: wallet.signTransaction,
+        publicKey: wallet.publicKey
+      }, {
+        preflightCommitment: 'recent',
+      }); 
+
+    const updateInstructions: TransactionInstruction[] = [];
+    const updateSigners: Keypair[] = [];
+  
+  var gogo = true
+  for (var v in jsmetadata.attributes){
+     if (jsmetadata.attributes[v].trait_type == 'Rarity'){
+      rarity = parseInt(jsmetadata.attributes[v].value)
+gogo = false
+     }
+     }
+    if (gogo){
+      for (var v in jsmetadata.attributes){
+        try{
+          if (parseFloat(jsmetadata.attributes[v].value) > 0){
+          jsmetadata.attributes[v].value = (parseFloat(jsmetadata.attributes[v].value) * 2).toString()
+        }
+      }
+        catch(er){
+
+        }
+      }
+      jsmetadata.attributes.push({'trait_type': 'Rarity', 'value': '4.1'})
+}
+
+const image = '0.png'
+      //const imageName = path.basename(image);
+      const index = '0';//ran.toString()
+
+      //console.log(`Processing file: ${index}`);
+var sex = 'progenitor/0.png'
+if (tokenmd.name.includes('Female')){
+
+for (var v in jsmetadata.attributes){
+        try{
+         if( jsmetadata.attributes[v].trait_type == 'Job'){
+          if (jsmetadata.attributes[v].value == 'medic'){
+
+          sex = 'progenitorf/0.png'
+          }
+          else { 
+          sex = 'progenitorf/1.png'
+         }
+       }
+        }
+        catch(er){
+
+//console.log(er)
+        }
+      }
+}
+else if (tokenmd.name.includes('Male')){
+
+for (var v in jsmetadata.attributes){
+        try{
+         if( jsmetadata.attributes[v].trait_type == 'Job'){
+          if (jsmetadata.attributes[v].value == 'medic'){
+
+          sex = 'progenitor/0.png'
+          }
+          else { 
+          sex = 'progenitor/1.png'
+         }
+       }
+        }
+        catch(er){
+//console.log(er)
+        }
+  
+      }
+}
+
+else if (tokenmd.name.includes('Dagron')){
+sex = 'dagron/0.png'
+}
+
+else if (tokenmd.name.includes('Slime')){
+sex = 'slime/0.png'
+}
+      const storageCost = 10;
+  // //console.log(manifest)
+  jsmetadata.image = "image.png"
+      var        sfbb = Math.floor(Math.floor(Math.random() * (10000 - 100)) / (rarity + 1) ) + 100
+jsmetadata.seller_fee_basis_points = (sfbb)
+        const manifestBuffer = Buffer.from(JSON.stringify(jsmetadata));
+const bytes = new TextEncoder().encode(JSON.stringify(jsmetadata));
+const mblob = new Blob([bytes], {
+    type: "application/json;charset=utf-8"
+});
+
+         var response2 = await fetch('https://stacc.art/img/' + sex, {
+      method: 'GET',
+      headers: {
+        'Accept': 'image/png',
+        'Content-Type': 'image/png',
+      },
+    })
+
+         const lala123 = await (response2.blob());
+
+          const instructions = [
+            web3.SystemProgram.transfer({
+              fromPubkey: wallet.publicKey,
+              toPubkey: PAYMENT_WALLET,
+              lamports: storageCost,
+            }),
+          ];        
+
+          const tx = await sendTransactionWithRetry(
+            provider.connection,
+        wallet,
+        instructions,
+        [],
+        'single',
+          );
+          console.info('transaction for arweave payment:', tx);
+////console.log(manifest)
+          // data.append('tags', JSON.stringify(tags));
+          // payment transaction
+          const data = new FormData();
+          data.append('transaction', tx['txid']);
+          data.append('env', 'mainnet-beta');
+          data.append('file[]', lala123,  `image.png`);
+          data.append('file[]', mblob, 'metadata.json');
+            const result = await upload(data, jsmetadata, 0);
+
+            const metadataFile = (result as any).messages?.find(
+              m => m.filename === 'manifest.json',
+            );
+            if (metadataFile?.transactionId) {
+              link = `https://arweave.net/${metadataFile.transactionId}`;
+            }
+
+const thedata = new Data({
+        name: tokenmd.name,
+        symbol: tokenmd.symbol,
+        uri: link,
+        creators: tokenmd.creators,
+        sellerFeeBasisPoints: jsmetadata.sellerFeeBasisPoints,
+      })
+//console.log(thedata)
+    // TODO: connect to testnet arweave
+    await updateMetadata(
+       thedata,
+      "F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj",
+      true,
+         items[i].info.mint,//mintkey??
+      wallet.publicKey.toBase58(),//payer
+      updateInstructions,
+    );
+    //console.log(updateInstructions)
+
+      var walletKeyPair = loadWalletKey('./jarekey.json');
+      
+
 try{
     const txid2 = await sendTransactionWithRetryWithKeypair(
       connection,
@@ -363,8 +550,6 @@ try{
 
 }
 }
-
-
 
   const artworkGrid = (
     <Masonry
