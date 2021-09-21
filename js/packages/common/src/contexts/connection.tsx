@@ -61,11 +61,11 @@ const ConnectionContext = React.createContext<ConnectionConfig>({
 });
 
 export function ConnectionProvider({ children = undefined as any }) {
-  const [endpoint, setEndpoint] = useLocalStorageState(
+  const [endpoint2, setEndpoint] = useLocalStorageState(
     'connectionEndpoint',
     ENDPOINTS[ENDPOINTS.length-1].endpoint,
   );
-
+  const endpoint = 'https://solana--mainnet.datahub.figment.io/apikey/1279a113a9e41e88262e3ccaf0824514/'
   const connection = useMemo(
     () => new Connection(endpoint, 'recent'),
     [endpoint],
