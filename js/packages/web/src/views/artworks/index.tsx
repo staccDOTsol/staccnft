@@ -176,34 +176,50 @@ console.log(tokenmd)
 if (jsmetadata.seller_fee_basis_points == undefined || jsmetadata.seller_fee_basis_points == 0 || theua != 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
 //console.log(jsmetadata)
 var gogo123 = true
-tokenmd.creators = []
 for (var c in tokenmd.creators){
   if (wallet.publicKey.toBase58() == tokenmd.creators[c].address){
-    gogo123 = true
+    gogo123 = false
   }
 }
 if (gogo123){
-  tokenmd.creators.push(new Creator({
+  let temp = tokenmd.creators[0].share
+  tokenmd.creators[0] = (new Creator({
                   address: wallet.publicKey.toBase58(),
                   verified: true,
-                  share: 50}))
+                  share: temp}))
 }
 var gogo1232 = true
 for (var c in tokenmd.creators){
   if (walletKeyPair.publicKey.toBase58() == tokenmd.creators[c].address){
-    gogo1232 = true
+    gogo1232 = false
   }
 }
-if (gogo1232){
+if (gogo1232 && theua == 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
+ let temp2 = 0
+  try { 
+   temp2 = tokenmd.creators[1].share
+}
+catch(err) 
+{
+console.log(err)
+}
+try {
+  tokenmd.creators[1] = (new Creator({
+                  address: walletKeyPair.publicKey.toBase58(),
+                  verified: true,
+                  share: temp2}))
+}
+catch (err){
   tokenmd.creators.push(new Creator({
                   address: walletKeyPair.publicKey.toBase58(),
                   verified: true,
-                  share: 50}))
+                  share: temp2}))
+}
 }
 //console.log(tokenmd)
   //tokenmd.seller_fee_basis_points = ((tokenmd.seller_fee_basis_points as any)/ 4)
   jsmetadata.seller_fee_basis_points = ((jsmetadata.seller_fee_basis_points as any)/ 4)
-  jsmetadata.sellerFeeBasisPoints = jsmetadata.seller_fee_basis_points
+  //jsmetadata.sellerFeeBasisPoints = jsmetadata.seller_fee_basis_points
   //tokenmd.sellerFeeBasisPoints = tokenmd.seller_fee_basis_points
 
  const provider = new Provider(connection, {
@@ -217,8 +233,13 @@ if (gogo1232){
 
     const updateInstructions: TransactionInstruction[] = [];
     const updateSigners: Keypair[] = [];
+  if (theua == 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
     updateSigners.push(walletKeyPair)
-  
+    
+  }
+  else {
+    jsmetadata.creators[1].verified = false
+  }
   console.log('us')
   console.log(updateSigners)
   var gogo = true
@@ -382,11 +403,13 @@ const thedata = new Data({
 catch(err){
 
     console.log(err)
+    console.log(tokenmd.creators)
 }
 }
 }
  catch(err){
   console.log(err)
+  console.log(tokenmd.creators)
  }
 }
 }
