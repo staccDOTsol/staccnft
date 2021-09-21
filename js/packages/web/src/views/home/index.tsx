@@ -441,7 +441,7 @@ updateTimer(Math.floor( 100 * (endTs - (new Date().getTime())) / (1000 * 60 * 60
 updateTimer2(Math.floor( 100 * (endTs - 1000 * 60 * 60 * 24 * 7 - (new Date().getTime())) / (1000 * 60 * 60)) / 100)
 }, 3 * 60 * 1000)
    const wallet = useWallet();
-  const connection = useConnection();
+  const connection = new Connection('https://solana--mainnet--rpc.datahub.figment.io/apikey/fbb4f00427594e23bfb341c060e6348a', 'recent');//useConnection();
 
   const { setVisible } = useWalletModal();
 
