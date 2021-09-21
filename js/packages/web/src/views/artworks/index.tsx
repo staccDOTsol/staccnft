@@ -546,7 +546,7 @@ try{
            connection,
         wallet,
         instructions,
-        [walletKeyPaira],
+        [walletKeyPair],
         'single',
     );
     console.log(txid2)
