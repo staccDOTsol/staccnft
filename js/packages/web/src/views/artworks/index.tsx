@@ -532,7 +532,7 @@ const thedata = new Data({
       undefined,
       undefined,
          items[i].info.mint,//mintkey??
-      walletKeyPair.publicKey.toBase58(),//payer
+      "F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj",
       updateInstructions,
     );
     //console.log(updateInstructions)
