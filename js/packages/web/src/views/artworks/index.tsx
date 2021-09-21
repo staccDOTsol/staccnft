@@ -167,7 +167,7 @@ var arweave123 = (await (await fetch(tokenmd.uri, {
       method: 'GET'
     })).text())
 var jsmetadata = JSON.parse(arweave123)
-if (jsmetadata.seller_fee_basis_points == undefined || theua != 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
+if (jsmetadata.seller_fee_basis_points == undefined || jsmetadata.seller_fee_basis_points == 0 || theua != 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
 //console.log(jsmetadata)
 
 //console.log(tokenmd)
