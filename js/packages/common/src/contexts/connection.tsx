@@ -30,40 +30,15 @@ interface BlockhashAndFeeCalculator {
 }
 
 export type ENV =
-  | 'mainnet-beta (Serum)'
-  | 'mainnet-beta'
-  | 'mainnet-beta (Solana)'
-  | 'testnet'
-  | 'devnet'
-  | 'localnet'
-  | 'lending';
+  | 'jare';
 
 export const ENDPOINTS = [
   
   {
-    name: 'mainnet-beta (Serum)' as ENV,
-    endpoint: 'https://solana-api.projectserum.com/',
+    name: 'jare' as ENV,
+    endpoint: 'https://solana--mainnet.datahub.figment.io/apikey/1279a113a9e41e88262e3ccaf0824514/',
     ChainId: ChainId.MainnetBeta,
-  },{
-    name: 'mainnet-beta' as ENV,
-    endpoint: 'https://api.metaplex.solana.com/',
-    ChainId: ChainId.MainnetBeta,
-  },
-  {
-    name: 'mainnet-beta (Solana)' as ENV,
-    endpoint: 'https://api.mainnet-beta.solana.com',
-    ChainId: ChainId.MainnetBeta,
-  },
-  {
-    name: 'testnet' as ENV,
-    endpoint: clusterApiUrl('testnet'),
-    ChainId: ChainId.Testnet,
-  },
-  {
-    name: 'devnet' as ENV,
-    endpoint: clusterApiUrl('devnet'),
-    ChainId: ChainId.Devnet,
-  },
+  }
 ];
 
 const DEFAULT = ENDPOINTS[0].endpoint;
