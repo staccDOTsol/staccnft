@@ -29,18 +29,18 @@ interface BlockhashAndFeeCalculator {
   feeCalculator: FeeCalculator;
 }
 
-export type ENV = 'jare';
+export type ENV = 'mainnet-beta';
 
 export const ENDPOINTS = [
   
   {
-    name: 'jare' as ENV,
-    endpoint: 'https://solana--mainnet.datahub.figment.io/apikey/1279a113a9e41e88262e3ccaf0824514',
+    name: 'mainnet-beta' as ENV,
+    endpoint: 'https://solana--mainnet.datahub.figment.io/apikey/1279a113a9e41e88262e3ccaf0824514/',
     ChainId: ChainId.MainnetBeta,
   }
 ];
 
-const DEFAULT = ENDPOINTS[0].endpoint;
+const DEFAULT = ENDPOINTS[ENDPOINTS.length-1].endpoint;
 
 interface ConnectionConfig {
   connection: Connection;
@@ -55,7 +55,7 @@ const ConnectionContext = React.createContext<ConnectionConfig>({
   endpoint: DEFAULT,
   setEndpoint: () => {},
   connection: new Connection(DEFAULT, 'recent'),
-  env: ENDPOINTS[0].name,
+  env: ENDPOINTS[ENDPOINTS.length-1].name,
   tokens: [],
   tokenMap: new Map<string, TokenInfo>(),
 });
@@ -63,7 +63,7 @@ const ConnectionContext = React.createContext<ConnectionConfig>({
 export function ConnectionProvider({ children = undefined as any }) {
   const [endpoint, setEndpoint] = useLocalStorageState(
     'connectionEndpoint',
-    ENDPOINTS[0].endpoint,
+    ENDPOINTS[ENDPOINTS.length-1].endpoint,
   );
 
   const connection = useMemo(
@@ -72,7 +72,7 @@ export function ConnectionProvider({ children = undefined as any }) {
   );
 
   const env =
-    ENDPOINTS.find(end => end.endpoint === endpoint)?.name || ENDPOINTS[0].name;
+    ENDPOINTS.find(end => end.endpoint === endpoint)?.name || ENDPOINTS[ENDPOINTS.length-1].name;
 
   const [tokens, setTokens] = useState<TokenInfo[]>([]);
   const [tokenMap, setTokenMap] = useState<Map<string, TokenInfo>>(new Map());
