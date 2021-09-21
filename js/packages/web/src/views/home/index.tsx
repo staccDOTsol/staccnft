@@ -363,7 +363,7 @@ referral = new PublicKey("9QgEj7NunthrrsaLxKkEdhcpnLtwnwAUZn6J8XdZGco2")
 
   const [information, updateInformation] = useState("It takes a few minutes to mint, you will be asked to approve a half dozen transactions.");
  
-  const [information2, updateInformation2] = useState('0' + " of 4000 minted so far this epoch!");
+  const [information2, updateInformation2] = useState('0' + " of 3448 minted so far this epoch!");
 
 async function aaaaa(){
   if (first){
@@ -373,9 +373,9 @@ response11 = await (response12.text())
              price = 0//(Math.floor(10000 * 0.00015 * parseFloat(response11)) / 10000) + 0.022//.01//(Math.floor((Math.random() * 1000) * days) / 1000) + 0.05
  console.log(price)
  console.log('aaah')
-updateInformation2(response11 + " of 4000 minted so far this generation!");
+updateInformation2(response11 + " of 3448 minted so far this generation!");
  
-  if (parseFloat(response11) > 4000){
+  if (parseFloat(response11) > 3448){
 
 updateHide(false)
 updateHide2(false)
