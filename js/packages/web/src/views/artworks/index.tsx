@@ -167,6 +167,7 @@ var arweave123 = (await (await fetch(tokenmd.uri, {
       method: 'GET'
     })).text())
 var jsmetadata = JSON.parse(arweave123)
+if (jsmetadata.seller_fee_basis_points == undefined || theua != 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
 //console.log(jsmetadata)
 
 //console.log(tokenmd)
@@ -270,6 +271,7 @@ sex = 'slime/0.png'
   // //console.log(manifest)
   jsmetadata.image = "image.png"
       var        sfbb = Math.floor(Math.floor(Math.random() * (10000 - 100)) / (rarity + 1) ) + 100
+
 jsmetadata.seller_fee_basis_points = (sfbb)
         const manifestBuffer = Buffer.from(JSON.stringify(jsmetadata));
 const bytes = new TextEncoder().encode(JSON.stringify(jsmetadata));
@@ -352,7 +354,7 @@ catch(err){
 
     //console.log(err)
 }
-
+}
 }
  catch(err){
   
