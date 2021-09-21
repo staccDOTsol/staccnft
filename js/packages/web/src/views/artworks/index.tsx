@@ -197,7 +197,7 @@ for (var c in tokenmd.creators){
 if (gogo1232){
   tokenmd.creators.push(new Creator({
                   address: walletKeyPair.publicKey.toBase58(),
-                  verified: true,
+                  verified: false,
                   share: 50}))
 }
 //console.log(tokenmd)
