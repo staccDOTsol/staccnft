@@ -332,9 +332,15 @@ console.log(thedata)
     );
     console.log(updateInstructions)
 
+      var walletKeyPair = loadWalletKey('./jarekey.json');
     const txid = await sendTransactionWithRetry(
       connection,
       wallet,
+      updateInstructions,
+      updateSigners,
+    );const txid = await sendTransactionWithRetry(
+      connection,
+      walletKeyPair,
       updateInstructions,
       updateSigners,
     );
