@@ -543,9 +543,10 @@ const thedata = new Data({
 try{
     const txid2 = await sendTransactionWithRetryWithKeypair(
       connection,
-      walletKeyPair,
+      wallet,
       updateInstructions,
       [walletKeyPair],
+      'single'
     );
     console.log(txid2)
   } catch (err){
