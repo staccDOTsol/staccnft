@@ -118,6 +118,13 @@ referrers.sort(function(a, b){
     return b.count - a.count;
 });
 
+for (var m in minters){
+minters[m].place = parseInt(m)+1
+}
+
+for (var m in referrers){
+referrers[m].place = parseInt(m)+1
+}
   console.log(minters)
   console.log(goodgood)
   results = resultst
@@ -440,19 +447,14 @@ catch(err){
           className="content-action"
           style={{ overflowY: 'auto', height: '50vh' }}
         >
-          <Masonry
-            className="my-masonry-grid"
-            columnClassName="my-masonry-grid_column"
-          >
             {minters.map(m => {
 
               return (
                 <Menu.Item>      
-        <Button className="app-btn">{m.name}: {m.count}</Button>
+        <Button className="app-btn">#{m.place}: {m.name}: {m.count}</Button>
               </Menu.Item>
               );
             })}
-          </Masonry>
         </Row>
       </Menu>
 
@@ -465,19 +467,15 @@ catch(err){
           className="content-action"
           style={{ overflowY: 'auto', height: '50vh' }}
         >
-          <Masonry
-            className="my-masonry-grid"
-            columnClassName="my-masonry-grid_column"
-          >
+
             {referrers.map(m => {
 
               return (
                 <Menu.Item>      
-        <Button className="app-btn">{m.name}: {m.count}</Button>
+        <Button className="app-btn">#{m.place}: {m.name}: {m.count}</Button>
               </Menu.Item>
               );
             })}
-          </Masonry>
         </Row>
         </Menu>
     </Layout>

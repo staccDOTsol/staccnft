@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import EventEmitter from 'events';
 import {
   useConnectionConfig,
-  MAINNET_URL,
   MAINNET_BACKUP_URL,
 } from '../connection';
 import { useListener } from '../utils';
@@ -19,7 +18,7 @@ import { TokenListProvider } from '@solana/spl-token-registry';
 // add the mints to that package. To add a token to the `AddTokenDialog`,
 // add the `mintAddress` here. The rest of the fields are not used.
 const POPULAR_TOKENS = {
-  [MAINNET_URL]: [
+  ["https://solana-api.projectserum.com"]: [
     {
       mintAddress: 'SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt',
       tokenName: 'Serum',
@@ -299,7 +298,7 @@ export function TokenRegistryProvider(props) {
   const { endpoint } = useConnectionConfig();
   const [tokenInfos, setTokenInfos] = useState(null);
   useEffect(() => {
-    if (endpoint !== MAINNET_BACKUP_URL && endpoint !== MAINNET_URL) return;
+    if (endpoint !== MAINNET_BACKUP_URL && endpoint !== "https://solana-api.projectserum.com") return;
     const tokenListProvider = new TokenListProvider();
     tokenListProvider.resolve().then((tokenListContainer) => {
       const cluster = clusterForEndpoint(endpoint);
