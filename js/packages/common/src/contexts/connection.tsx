@@ -29,14 +29,13 @@ interface BlockhashAndFeeCalculator {
   feeCalculator: FeeCalculator;
 }
 
-export type ENV =
-  | 'jare';
+export type ENV = 'jare';
 
 export const ENDPOINTS = [
   
   {
     name: 'jare' as ENV,
-    endpoint: 'https://solana--mainnet.datahub.figment.io/apikey/1279a113a9e41e88262e3ccaf0824514/',
+    endpoint: 'https://solana--mainnet.datahub.figment.io/apikey/1279a113a9e41e88262e3ccaf0824514',
     ChainId: ChainId.MainnetBeta,
   }
 ];
