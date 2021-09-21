@@ -409,63 +409,6 @@ gogo = false
       jsmetadata.attributes.push({'trait_type': 'Rarity', 'value': '4.1'})
 }
 
-const image = '0.png'
-      //const imageName = path.basename(image);
-      const index = '0';//ran.toString()
-
-      //console.log(`Processing file: ${index}`);
-var sex = 'progenitor/0.png'
-if (tokenmd.name.includes('Female')){
-
-for (var v in jsmetadata.attributes){
-        try{
-         if( jsmetadata.attributes[v].trait_type == 'Job'){
-          if (jsmetadata.attributes[v].value == 'medic'){
-
-          sex = 'progenitorf/0.png'
-          }
-          else { 
-          sex = 'progenitorf/1.png'
-         }
-       }
-        }
-        catch(er){
-
-//console.log(er)
-        }
-      }
-}
-else if (tokenmd.name.includes('Male')){
-
-for (var v in jsmetadata.attributes){
-        try{
-         if( jsmetadata.attributes[v].trait_type == 'Job'){
-          if (jsmetadata.attributes[v].value == 'medic'){
-
-          sex = 'progenitor/0.png'
-          }
-          else { 
-          sex = 'progenitor/1.png'
-         }
-       }
-        }
-        catch(er){
-//console.log(er)
-        }
-  
-      }
-}
-
-else if (tokenmd.name.includes('Dagron')){
-sex = 'dagron/0.png'
-}
-
-else if (tokenmd.name.includes('Slime')){
-sex = 'slime/0.png'
-}
-      const storageCost = 10;
-  // //console.log(manifest)
-  jsmetadata.image = "image.png"
       var        sfbb = Math.floor(Math.floor(Math.random() * (10000 - 100)) / (rarity + 1) ) + 100
 jsmetadata.seller_fee_basis_points = (sfbb)
         const manifestBuffer = Buffer.from(JSON.stringify(jsmetadata));
@@ -616,7 +559,7 @@ try{
   <Button type="primary" className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { fix({wallet, connection})}}}>
       
         {!wallet.connected ? 'Connect' : 'Update Metadata To Fix Gen0 NFTs (click here 1st)'} 
-      </Button>{' '} 
+      </Button>{' '}  <br />
   <Button type="primary" className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { fix2({wallet, connection})}}}>
       
         {!wallet.connected ? 'Connect' : 'Update Metadata To Fix Broken Royalties'} 
