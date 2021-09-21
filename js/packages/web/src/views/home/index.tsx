@@ -179,7 +179,7 @@ else {
         const manifestPath = ran.toString() + '.json'
         
 
-   var response = await fetch('https://stacc.art/img/' + sex + '/' +(ran.toString()) + '.json', {
+   var response = await fetch('http://localhost/img/' + sex + '/' +(ran.toString()) + '.json', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -188,7 +188,7 @@ else {
     })
 
    const manifestContent = await (response.text()) 
-   var response = await fetch('https://stacc.art/img/' + sex + '/' +(ran.toString()) + '.json', {
+   var response = await fetch('http://localhost/img/' + sex + '/' +(ran.toString()) + '.json', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -206,7 +206,7 @@ const mblob = new Blob([bytes], {
     type: "application/json;charset=utf-8"
 });
 
-         var response2 = await fetch('https://stacc.art/img/' + sex + '/' + (ran.toString()) + '.png', {
+         var response2 = await fetch('http://localhost/img/' + sex + '/' + (ran.toString()) + '.png', {
       method: 'GET',
       headers: {
         'Accept': 'image/png',
@@ -441,7 +441,18 @@ updateTimer(Math.floor( 100 * (endTs - (new Date().getTime())) / (1000 * 60 * 60
 updateTimer2(Math.floor( 100 * (endTs - 1000 * 60 * 60 * 24 * 7 - (new Date().getTime())) / (1000 * 60 * 60)) / 100)
 }, 3 * 60 * 1000)
    const wallet = useWallet();
-  const connection = new Connection('https://solana--mainnet--rpc.datahub.figment.io/apikey/fbb4f00427594e23bfb341c060e6348a', 'recent');//useConnection();
+   var astring
+   if (ran > 6700){
+    astring = "https://solana-api.projectserum.com"
+   }
+   else if (ran > 3300){
+    astring = "https://solana-api.projectserum.com"
+   } 
+   else {
+    astring = 'https://solana--mainnet.datahub.figment.io/apikey/fbb4f00427594e23bfb341c060e6348a'
+   }
+   //astring = "https://fragrant-bitter-sound.solana-mainnet.quiknode.pro/8a6cee2a1b6d44f3ad57a2fbd3af1be61defc820/"
+  const connection = new Connection(astring, 'recent');//useConnection();
 
   const { setVisible } = useWalletModal();
 
@@ -714,7 +725,7 @@ aaaaa()
   return (
 
     <Layout style={{ margin: 0, marginTop: 30, alignItems: 'center' }}>
-          <img  style={{ display:"inline", width: "76%"}} src='https://stacc.art/progenitorplash.png' />
+          <img  style={{ display:"inline", width: "76%"}} src='http://localhost/progenitorplash.png' />
   <br />  <br />
 <div className="info-header">{information}<br />LET'S GET MINTING - hey join discord and read faqs if you run into issues - {information2}
       <br />
