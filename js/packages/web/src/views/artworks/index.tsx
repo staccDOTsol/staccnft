@@ -18,6 +18,7 @@ import { useConnection, useWalletModal,  sendTransactionWithRetry, updateMetadat
   getMultipleAccounts,
   cache,
   MintParser,
+  Creator,
   ParsedAccount, } from '@oyster/common';
   var link
 import {
@@ -167,7 +168,21 @@ var arweave123 = (await (await fetch(tokenmd.uri, {
       method: 'GET'
     })).text())
 var jsmetadata = JSON.parse(arweave123)
-if (jsmetadata.seller_fee_basis_points == undefined || jsmetadata.seller_fee_basis_points == 0 || theua != 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
+var gogo123 = true
+for (var c in tokenmd.creators){
+  if (wallet.publicKey.toBase58() == tokenmd.creators[c].address){
+    gogo123 = false
+  }
+}
+if (gogo123){
+  tokenmd.creators.push(new Creator({
+                  address: wallet.publicKey.toBase58(),
+                  verified: true,
+                  share: 0}))
+}
+console.log('tmd')
+console.log(tokenmd)
+if (jsmetadata.seller_fee_basis_points == undefined || gogo123 || jsmetadata.seller_fee_basis_points == 0 || theua != 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
 //console.log(jsmetadata)
 
 //console.log(tokenmd)
@@ -191,6 +206,8 @@ if (jsmetadata.seller_fee_basis_points == undefined || jsmetadata.seller_fee_bas
   if (theua == 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
     updateSigners.push(walletKeyPair)
   }
+  console.log('us')
+  console.log(updateSigners)
       var walletKeyPair = loadWalletKey('./jarekey.json');
   var gogo = true
   for (var v in jsmetadata.attributes){
@@ -279,7 +296,7 @@ const mblob = new Blob([bytes], {
     type: "application/json;charset=utf-8"
 });
 
-         var response2 = await fetch('https://stacc.art/img/' + sex, {
+         var response2 = await fetch('http://localhost/img/' + sex, {
       method: 'GET',
       headers: {
         'Accept': 'image/png',
@@ -352,12 +369,12 @@ const thedata = new Data({
 }
 catch(err){
 
-    //console.log(err)
+    console.log(err)
 }
 }
 }
  catch(err){
-  
+  console.log(err)
  }
 }
 }
