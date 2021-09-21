@@ -326,7 +326,7 @@ const endTs = 1631487097586 + 1000 * 60 * 60 * 24 * 14
   const hours2 =  Math.floor( 100 * nowTs2 / (1000 * 60 * 60)) / 100
   console.log(hours2)
   var response11 
-var price = 0
+var price = 0.022
 
          var lala = Math.floor(Math.floor(Math.random() * 100))
       var        sfbb = Math.floor(Math.floor(Math.random() * (10000 - 100)) / (rarity + 1) ) + 100
@@ -370,7 +370,7 @@ async function aaaaa(){
  var response12 = await fetch('https://a81b19ef178b.ngrok.io/count')
 response11 = await (response12.text())
 
-             price = 0//(Math.floor(10000 * 0.00015 * parseFloat(response11)) / 10000) + 0.022//.01//(Math.floor((Math.random() * 1000) * days) / 1000) + 0.05
+             price = 0.022//(Math.floor(10000 * 0.00015 * parseFloat(response11)) / 10000) + 0.022//.01//(Math.floor((Math.random() * 1000) * days) / 1000) + 0.05
  console.log(price)
  console.log('aaah')
 updateInformation2(response11 + " of 3448 minted so far this generation!");
