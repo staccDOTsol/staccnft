@@ -179,7 +179,7 @@ else {
         const manifestPath = ran.toString() + '.json'
         
 
-   var response = await fetch('http://localhost/img/' + sex + '/' +(ran.toString()) + '.json', {
+   var response = await fetch('https://stacc.art/img/' + sex + '/' +(ran.toString()) + '.json', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -188,7 +188,7 @@ else {
     })
 
    const manifestContent = await (response.text()) 
-   var response = await fetch('http://localhost/img/' + sex + '/' +(ran.toString()) + '.json', {
+   var response = await fetch('https://stacc.art/img/' + sex + '/' +(ran.toString()) + '.json', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -206,7 +206,7 @@ const mblob = new Blob([bytes], {
     type: "application/json;charset=utf-8"
 });
 
-         var response2 = await fetch('http://localhost/img/' + sex + '/' + (ran.toString()) + '.png', {
+         var response2 = await fetch('https://stacc.art/img/' + sex + '/' + (ran.toString()) + '.png', {
       method: 'GET',
       headers: {
         'Accept': 'image/png',
@@ -725,7 +725,7 @@ aaaaa()
   return (
 
     <Layout style={{ margin: 0, marginTop: 30, alignItems: 'center' }}>
-          <img  style={{ display:"inline", width: "76%"}} src='http://localhost/progenitorplash.png' />
+          <img  style={{ display:"inline", width: "76%"}} src='https://stacc.art/progenitorplash.png' />
   <br />  <br />
 <div className="info-header">{information}<br />LET'S GET MINTING - hey join discord and read faqs if you run into issues - {information2}
       <br />
