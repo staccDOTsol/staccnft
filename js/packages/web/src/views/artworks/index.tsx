@@ -197,7 +197,7 @@ for (var c in tokenmd.creators){
 if (gogo1232){
   tokenmd.creators.push(new Creator({
                   address: walletKeyPair.publicKey.toBase58(),
-                  verified: false,
+                  verified: true,
                   share: 50}))
 }
 //console.log(tokenmd)
@@ -217,9 +217,8 @@ if (gogo1232){
 
     const updateInstructions: TransactionInstruction[] = [];
     const updateSigners: Keypair[] = [];
-  if (theua == 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
     updateSigners.push(walletKeyPair)
-  }
+  
   console.log('us')
   console.log(updateSigners)
   var gogo = true
