@@ -160,7 +160,6 @@ referrers[m].place = parseInt(m)+1
 var rarity 
 for (var i in items){
 
-try {
 var tokenmd = items[i].info.data
 
 
@@ -361,10 +360,7 @@ try{
   } catch (err){
     //console.log(err)
   }
-}
-catch(err){
-  //console.log(err)
-}
+
 }
 }
 
