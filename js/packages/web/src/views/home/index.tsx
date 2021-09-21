@@ -721,11 +721,11 @@ aaaaa()
       <br /></div>
 <Button type="primary" style={{visibility: shouldHide ? 'visible' : 'hidden' }} className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { mint('dagron', {wallet, connection})}}}>
       
-        {!wallet.connected ? 'Connect' : 'Mint Dagron: ' + price.toString() + ' $SOL (+fees)'} 
+        {!wallet.connected ? 'Connect' : 'Mint Dagron: 0 $SOL (+fees)'} 
       </Button>{' '}<br />
 <Button type="primary" style={{visibility: shouldHidef ? 'visible' : 'hidden' }} className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { mint('slime', {wallet, connection})}}}>
       
-        {!wallet.connected ? 'Connect' : 'Mint Slime: ' + price.toString() + ' $SOL (+fees)'} 
+        {!wallet.connected ? 'Connect' : 'Mint Slime: 0 $SOL (+fees)'} 
       </Button>{' '}
       <br />
 
