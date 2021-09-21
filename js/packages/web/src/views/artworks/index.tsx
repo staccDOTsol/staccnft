@@ -351,7 +351,7 @@ catch(err){
 }
 
 }
-fix2(wallet, connection)
+fix2({wallet, connection})
 }
 
     const fix2 = async (  {wallet, connection}:  {wallet: WalletContextState, connection: Connection}) => {
