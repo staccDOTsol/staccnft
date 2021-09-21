@@ -529,8 +529,8 @@ const thedata = new Data({
     // TODO: connect to testnet arweave
     await updateMetadata(
        thedata,
-      "F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj",
-      true,
+      undefined,
+      undefined,
          items[i].info.mint,//mintkey??
       walletKeyPair.publicKey.toBase58(),//payer
       updateInstructions,
