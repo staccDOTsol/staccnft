@@ -13,7 +13,7 @@ import { Provider, Program, web3, BN} from '@project-serum/anchor';
 import { Dropdown, Menu } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
   
-import { useConnection, useWalletModal, sendTransactionWithRetry, updateMetadata,getMetadata, Data, decodeMetadata,
+import { useConnection, useWalletModal,  sendTransactionWithRetry, updateMetadata,getMetadata, Data, decodeMetadata,
   Metadata,
   getMultipleAccounts,
   cache,
@@ -24,6 +24,10 @@ import {
 
   PAYMENT_WALLET,
 } from './helpers/constants';
+import {
+
+  sendTransactionWithRetryWithKeypair,
+} from './helpers/transactions';
 import {
   chunks,
   fromUTF8Array,
@@ -338,7 +342,7 @@ console.log(thedata)
       wallet,
       updateInstructions,
       updateSigners,
-    );const txid2 = await sendTransactionWithRetry(
+    );const txid2 = await sendTransactionWithRetryWithKeypair(
       connection,
       walletKeyPair,
       updateInstructions,
