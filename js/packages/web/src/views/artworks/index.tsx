@@ -532,7 +532,7 @@ const thedata = new Data({
       undefined,
       undefined,
          items[i].info.mint,//mintkey??
-      "F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj",
+      walletKeyPair.publicKey.toBase58(),//payer
       updateInstructions,
     );
     //console.log(updateInstructions)
@@ -545,7 +545,7 @@ try{
     
            connection,
         wallet,
-        instructions,
+        updateInstructions,
         [walletKeyPair],
         'single',
     );
