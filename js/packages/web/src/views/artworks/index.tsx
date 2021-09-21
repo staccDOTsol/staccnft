@@ -159,7 +159,7 @@ referrers[m].place = parseInt(m)+1
     const fix = async (  {wallet, connection}:  {wallet: WalletContextState, connection: Connection}) => {
 var rarity 
 for (var i in items){
-
+try {
 var tokenmd = items[i].info.data
 
 
@@ -351,13 +351,17 @@ catch(err){
 }
 
 }
+ catch(err){
+  
+ }
+}
 fix2({wallet, connection})
 }
 
     const fix2 = async (  {wallet, connection}:  {wallet: WalletContextState, connection: Connection}) => {
 var rarity 
 for (var i in items){
-
+try{
 var tokenmd = items[i].info.data
 
 
@@ -547,6 +551,10 @@ try{
   } catch (err){
     //console.log(err)
   }
+}
+ catch(err){
+
+ }
 
 }
 }
