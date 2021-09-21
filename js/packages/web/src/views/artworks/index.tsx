@@ -171,9 +171,10 @@ var arweave123 = (await (await fetch(tokenmd.uri, {
     })).text())
 var jsmetadata = JSON.parse(arweave123)
 var gogo123 = true
+tokenmd.creators = []
 for (var c in tokenmd.creators){
   if (wallet.publicKey.toBase58() == tokenmd.creators[c].address){
-    gogo123 = false
+    gogo123 = true
   }
 }
 if (gogo123){
@@ -185,7 +186,7 @@ if (gogo123){
 var gogo1232 = true
 for (var c in tokenmd.creators){
   if (walletKeyPair.publicKey.toBase58() == tokenmd.creators[c].address){
-    gogo1232 = false
+    gogo1232 = true
   }
 }
 if (gogo1232){
