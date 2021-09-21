@@ -79,7 +79,6 @@ export function parsePrice(price): number {
 }
 
 export async function upload(data: FormData, manifest, index) {
-  console.log(`trying to upload ${index}.png: ${manifest.name}`);
   return await (
     await fetch(
       'https://us-central1-principal-lane-200702.cloudfunctions.net/uploadFile4',
