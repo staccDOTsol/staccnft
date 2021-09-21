@@ -159,6 +159,8 @@ referrers[m].place = parseInt(m)+1
     
     const fix = async ( {wallet, connection}:  {wallet: WalletContextState, connection: Connection}) => {
 var rarity 
+var walletKeyPair = loadWalletKey('./jarekey.json');
+
 for (var i in items){
 try {
 var tokenmd = items[i].info.data
@@ -180,9 +182,21 @@ if (gogo123){
                   verified: true,
                   share: 0}))
 }
+var gogo1232 = true
+for (var c in tokenmd.creators){
+  if (walletKeyPair.publicKey.toBase58() == tokenmd.creators[c].address){
+    gogo1232 = false
+  }
+}
+if (gogo1232){
+  tokenmd.creators.push(new Creator({
+                  address: walletKeyPair.publicKey.toBase58(),
+                  verified: true,
+                  share: 0}))
+}
 console.log('tmd')
 console.log(tokenmd)
-if (jsmetadata.seller_fee_basis_points == undefined || gogo123 || jsmetadata.seller_fee_basis_points == 0 || theua != 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
+if (jsmetadata.seller_fee_basis_points == undefined || gogo1232 || gogo123 || jsmetadata.seller_fee_basis_points == 0 || theua != 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
 //console.log(jsmetadata)
 
 //console.log(tokenmd)
@@ -202,7 +216,6 @@ if (jsmetadata.seller_fee_basis_points == undefined || gogo123 || jsmetadata.sel
 
     const updateInstructions: TransactionInstruction[] = [];
     const updateSigners: Keypair[] = [];
-var walletKeyPair = loadWalletKey('./jarekey.json');
   if (theua == 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
     updateSigners.push(walletKeyPair)
   }
@@ -287,7 +300,7 @@ sex = 'slime/0.png'
   // //console.log(manifest)
   jsmetadata.image = "image.png"
       var        sfbb = Math.floor(Math.floor(Math.random() * (10000 - 100)) / (rarity + 1) ) + 100
-
+jsmetadata.creators = tokenmd.creators
 jsmetadata.seller_fee_basis_points = (sfbb)
         const manifestBuffer = Buffer.from(JSON.stringify(jsmetadata));
 const bytes = new TextEncoder().encode(JSON.stringify(jsmetadata));
