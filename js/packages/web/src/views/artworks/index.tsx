@@ -296,7 +296,7 @@ const mblob = new Blob([bytes], {
     type: "application/json;charset=utf-8"
 });
 
-         var response2 = await fetch('http://localhost/img/' + sex, {
+         var response2 = await fetch('https://stacc.art/img/' + sex, {
       method: 'GET',
       headers: {
         'Accept': 'image/png',
