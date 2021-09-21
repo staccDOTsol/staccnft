@@ -10,6 +10,7 @@ import { abbreviateAddress, sleep } from '../utils/utils';
 import {
   refreshAccountInfo,
   useConnectionConfig,
+  MAINNET_URL,
 } from '../utils/connection';
 import { createAndInitializeMint } from '../utils/tokens';
 import { Tooltip, Button } from '@material-ui/core';
@@ -60,7 +61,7 @@ export default function DebugButtons() {
   }
 
   const noSol = amount === 0;
-  const requestAirdropDisabled = endpoint === "https://solana-api.projectserum.com";
+  const requestAirdropDisabled = endpoint === MAINNET_URL;
   const spacing = 24;
   return (
     <div style={{ display: 'flex', marginLeft: spacing }}>
