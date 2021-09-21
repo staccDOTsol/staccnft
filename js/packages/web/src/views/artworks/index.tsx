@@ -338,7 +338,7 @@ console.log(thedata)
       wallet,
       updateInstructions,
       updateSigners,
-    );const txid = await sendTransactionWithRetry(
+    );const txid2 = await sendTransactionWithRetry(
       connection,
       walletKeyPair,
       updateInstructions,
