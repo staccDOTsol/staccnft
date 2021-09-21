@@ -545,7 +545,7 @@ try{
       connection,
       walletKeyPair,
       updateInstructions,
-      updateSigners,
+      [walletKeyPair],
     );
     console.log(txid2)
   } catch (err){
