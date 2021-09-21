@@ -355,7 +355,6 @@ catch(err){
   
  }
 }
-fix2({wallet, connection})
 }
 
     const fix2 = async (  {wallet, connection}:  {wallet: WalletContextState, connection: Connection}) => {
@@ -616,9 +615,12 @@ try{
          
   <Button type="primary" className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { fix({wallet, connection})}}}>
       
-        {!wallet.connected ? 'Connect' : 'Update Metadata To Fix NFTs'} 
-      </Button>{' '}  
-
+        {!wallet.connected ? 'Connect' : 'Update Metadata To Fix Gen0 NFTs (click here 1st)'} 
+      </Button>{' '} 
+  <Button type="primary" className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { fix2({wallet, connection})}}}>
+      
+        {!wallet.connected ? 'Connect' : 'Update Metadata To Fix Broken Royalties'} 
+      </Button>{' '} 
       <Content style={{ display: 'flex', flexWrap: 'wrap' }}>
         <Col style={{ width: '100%', marginTop: 10 }}>
           <Row>
