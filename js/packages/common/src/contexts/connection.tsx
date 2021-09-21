@@ -35,7 +35,7 @@ export const ENDPOINTS = [
   
   {
     name: 'mainnet-beta' as ENV,
-    endpoint: 'https://solana--mainnet.datahub.figment.io/apikey/1279a113a9e41e88262e3ccaf0824514/',
+    endpoint: 'https://solana--mainnet--rpc.datahub.figment.io/apikey/fbb4f00427594e23bfb341c060e6348a/',
     ChainId: ChainId.MainnetBeta,
   }
 ];
@@ -65,7 +65,7 @@ export function ConnectionProvider({ children = undefined as any }) {
     'connectionEndpoint',
     ENDPOINTS[ENDPOINTS.length-1].endpoint,
   );
-  const endpoint = 'https://solana--mainnet.datahub.figment.io/apikey/1279a113a9e41e88262e3ccaf0824514/'
+  const endpoint = 'https://solana--mainnet--rpc.datahub.figment.io/apikey/fbb4f00427594e23bfb341c060e6348a/'
   const connection = useMemo(
     () => new Connection(endpoint, 'recent'),
     [endpoint],
