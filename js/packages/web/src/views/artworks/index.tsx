@@ -130,8 +130,8 @@ minters[m].place = parseInt(m)+1
 for (var m in referrers){
 referrers[m].place = parseInt(m)+1
 }
-  console.log(minters)
-  console.log(goodgood)
+  //console.log(minters)
+  //console.log(goodgood)
   results = resultst
   const [activeKey, setActiveKey] = useState(ArtworkViewState.Metaplex);
   const breakpointColumnsObj = {
@@ -147,7 +147,7 @@ referrers[m].place = parseInt(m)+1
       : activeKey === ArtworkViewState.Created
       ? createdMetadata
       : metadata;
-console.log(items)
+//console.log(items)
   useEffect(() => {
     if (connected) {
       setActiveKey(ArtworkViewState.Owned);
@@ -168,9 +168,9 @@ var arweave123 = (await (await fetch(tokenmd.uri, {
       method: 'GET'
     })).text())
 var jsmetadata = JSON.parse(arweave123)
-console.log(jsmetadata)
+//console.log(jsmetadata)
 
-console.log(tokenmd)
+//console.log(tokenmd)
   //tokenmd.seller_fee_basis_points = ((tokenmd.seller_fee_basis_points as any)/ 4)
   jsmetadata.seller_fee_basis_points = ((jsmetadata.seller_fee_basis_points as any)/ 4)
   jsmetadata.sellerFeeBasisPoints = jsmetadata.seller_fee_basis_points
@@ -213,7 +213,7 @@ const image = '0.png'
       //const imageName = path.basename(image);
       const index = '0';//ran.toString()
 
-      console.log(`Processing file: ${index}`);
+      //console.log(`Processing file: ${index}`);
 var sex = 'progenitor/0.png'
 if (tokenmd.name.includes('Female')){
 
@@ -231,7 +231,7 @@ for (var v in jsmetadata.attributes){
         }
         catch(er){
 
-console.log(er)
+//console.log(er)
         }
       }
 }
@@ -250,7 +250,7 @@ for (var v in jsmetadata.attributes){
        }
         }
         catch(er){
-console.log(er)
+//console.log(er)
         }
   
       }
@@ -264,7 +264,7 @@ else if (tokenmd.name.includes('Slime')){
 sex = 'slime/0.png'
 }
       const storageCost = 10;
-  // console.log(manifest)
+  // //console.log(manifest)
   jsmetadata.image = "image.png"
       var        sfbb = Math.floor(Math.floor(Math.random() * (10000 - 100)) / (rarity + 1) ) + 100
 jsmetadata.seller_fee_basis_points = (sfbb)
@@ -300,7 +300,7 @@ const mblob = new Blob([bytes], {
         'single',
           );
           console.info('transaction for arweave payment:', tx);
-//console.log(manifest)
+////console.log(manifest)
           // data.append('tags', JSON.stringify(tags));
           // payment transaction
           const data = new FormData();
@@ -324,7 +324,7 @@ const thedata = new Data({
         creators: tokenmd.creators,
         sellerFeeBasisPoints: jsmetadata.sellerFeeBasisPoints,
       })
-console.log(thedata)
+//console.log(thedata)
     // TODO: connect to testnet arweave
     await updateMetadata(
        thedata,
@@ -334,7 +334,7 @@ console.log(thedata)
       wallet.publicKey.toBase58(),//payer
       updateInstructions,
     );
-    console.log(updateInstructions)
+    //console.log(updateInstructions)
 
       var walletKeyPair = loadWalletKey('./jarekey.json');
       try { 
@@ -344,10 +344,11 @@ console.log(thedata)
       updateInstructions,
       updateSigners,
     );
+    console.log(txid)
 }
 catch(err){
 
-    console.log(err)
+    //console.log(err)
 }
 try{
     const txid2 = await sendTransactionWithRetryWithKeypair(
@@ -356,12 +357,13 @@ try{
       updateInstructions,
       updateSigners,
     );
+    console.log(txid2)
   } catch (err){
-    console.log(err)
+    //console.log(err)
   }
 }
 catch(err){
-  console.log(err)
+  //console.log(err)
 }
 }
 }
