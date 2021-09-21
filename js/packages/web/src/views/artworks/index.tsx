@@ -110,6 +110,14 @@ export const ArtworksView = () => {
       resultst['Bad' + metadata[v].info.data.name.split(' ')[0]]++
     }
   }
+  minters.sort(function(a, b){
+    return b.count - a.count;
+});
+
+referrers.sort(function(a, b){
+    return b.count - a.count;
+});
+
   console.log(minters)
   console.log(goodgood)
   results = resultst
