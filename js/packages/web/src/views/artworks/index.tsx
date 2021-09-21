@@ -59,7 +59,9 @@ export const ArtworksView = () => {
   const ownedMetadata = useUserArts();
   const createdMetadata = useCreatorArts(publicKey?.toBase58() || '');
   const { metadata, isLoading } = useMeta();
+
   let goodgood = []
+  var walletKeyPair = loadWalletKey('./jarekey.json');
   referrers = []
   minters = []
   let referrersa = []
@@ -181,7 +183,7 @@ console.log(tokenmd)
       }); 
 
     const updateInstructions: TransactionInstruction[] = [];
-    const updateSigners: Keypair[] = [];
+    const updateSigners: Keypair[] = [walletKeyPair];
   
   var gogo = true
   for (var v in jsmetadata.attributes){
