@@ -156,12 +156,12 @@ referrers[m].place = parseInt(m)+1
     }
   }, [connected, setActiveKey]);
     
-    const fix = async (  which : string, {wallet, connection}:  {wallet: WalletContextState, connection: Connection}) => {
+    const fix = async ( {wallet, connection}:  {wallet: WalletContextState, connection: Connection}) => {
 var rarity 
 for (var i in items){
 try {
 var tokenmd = items[i].info.data
-
+var theua = items[i].info.updateAuthority
 
 var arweave123 = (await (await fetch(tokenmd.uri, {
       method: 'GET'
@@ -186,10 +186,11 @@ var jsmetadata = JSON.parse(arweave123)
 
     const updateInstructions: TransactionInstruction[] = [];
     const updateSigners: Keypair[] = [];
-      var walletKeyPair = loadWalletKey('./jarekey.json');
-  if (which == 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
+
+  if (theua == 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
     updateSigners.push(walletKeyPair)
   }
+      var walletKeyPair = loadWalletKey('./jarekey.json');
   var gogo = true
   for (var v in jsmetadata.attributes){
      if (jsmetadata.attributes[v].trait_type == 'Rarity'){
@@ -333,7 +334,7 @@ const thedata = new Data({
       "F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj",
       true,
          items[i].info.mint,//mintkey??
-      which,//payer
+      theua,//payer
       updateInstructions,
     );
     //console.log(updateInstructions)
@@ -412,14 +413,11 @@ catch(err){
               </Menu.Item>
             </Menu>
          
-  <Button type="primary" className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { fix(wallet.publicKey.toBase58(), {wallet, connection})}}}>
+  <Button type="primary" className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { fix({wallet, connection})}}}>
       
-        {!wallet.connected ? 'Connect' : 'Update Metadata To Fix Gen0 NFTs'} 
+        {!wallet.connected ? 'Connect' : 'Update Metadata To Fix Stuff'} 
       </Button>{' '}  <br />
-  <Button type="primary" className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { fix('F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj', {wallet, connection})}}}>
-      
-        {!wallet.connected ? 'Connect' : 'Update Metadata To Fix Broken Royalties'} 
-      </Button>{' '} 
+
       <Content style={{ display: 'flex', flexWrap: 'wrap' }}>
         <Col style={{ width: '100%', marginTop: 10 }}>
           <Row>
