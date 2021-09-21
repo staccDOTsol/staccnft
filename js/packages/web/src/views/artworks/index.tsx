@@ -202,13 +202,12 @@ if (jsmetadata.seller_fee_basis_points == undefined || gogo123 || jsmetadata.sel
 
     const updateInstructions: TransactionInstruction[] = [];
     const updateSigners: Keypair[] = [];
-
+var walletKeyPair = loadWalletKey('./jarekey.json');
   if (theua == 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
     updateSigners.push(walletKeyPair)
   }
   console.log('us')
   console.log(updateSigners)
-      var walletKeyPair = loadWalletKey('./jarekey.json');
   var gogo = true
   for (var v in jsmetadata.attributes){
      if (jsmetadata.attributes[v].trait_type == 'Rarity'){
@@ -308,7 +307,7 @@ const mblob = new Blob([bytes], {
 
           const instructions = [
             web3.SystemProgram.transfer({
-              fromPubkey: wallet.publicKey,
+              fromPubkey: wallet.publicKey, 
               toPubkey: PAYMENT_WALLET,
               lamports: storageCost,
             }),
