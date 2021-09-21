@@ -132,7 +132,8 @@ for (var m in referrers){
 referrers[m].place = parseInt(m)+1
 }
   //console.log(minters)
-  //console.log(goodgood)
+  console.log(goodgood)
+  console.log(goodgood.length)
   results = resultst
   const [activeKey, setActiveKey] = useState(ArtworkViewState.Metaplex);
   const breakpointColumnsObj = {
