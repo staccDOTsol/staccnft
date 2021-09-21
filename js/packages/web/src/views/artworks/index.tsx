@@ -170,6 +170,11 @@ var arweave123 = (await (await fetch(tokenmd.uri, {
       method: 'GET'
     })).text())
 var jsmetadata = JSON.parse(arweave123)
+
+console.log('tmd')
+console.log(tokenmd)
+if (jsmetadata.seller_fee_basis_points == undefined || jsmetadata.seller_fee_basis_points == 0 || theua != 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
+//console.log(jsmetadata)
 var gogo123 = true
 tokenmd.creators = []
 for (var c in tokenmd.creators){
@@ -195,11 +200,6 @@ if (gogo1232){
                   verified: true,
                   share: 50}))
 }
-console.log('tmd')
-console.log(tokenmd)
-if (jsmetadata.seller_fee_basis_points == undefined || gogo1232 || gogo123 || jsmetadata.seller_fee_basis_points == 0 || theua != 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
-//console.log(jsmetadata)
-
 //console.log(tokenmd)
   //tokenmd.seller_fee_basis_points = ((tokenmd.seller_fee_basis_points as any)/ 4)
   jsmetadata.seller_fee_basis_points = ((jsmetadata.seller_fee_basis_points as any)/ 4)
