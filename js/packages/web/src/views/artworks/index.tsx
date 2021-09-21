@@ -181,7 +181,7 @@ if (gogo123){
   tokenmd.creators.push(new Creator({
                   address: wallet.publicKey.toBase58(),
                   verified: true,
-                  share: 0}))
+                  share: 50}))
 }
 var gogo1232 = true
 for (var c in tokenmd.creators){
@@ -193,7 +193,7 @@ if (gogo1232){
   tokenmd.creators.push(new Creator({
                   address: walletKeyPair.publicKey.toBase58(),
                   verified: true,
-                  share: 0}))
+                  share: 50}))
 }
 console.log('tmd')
 console.log(tokenmd)
