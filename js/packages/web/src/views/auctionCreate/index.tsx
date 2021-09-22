@@ -701,7 +701,7 @@ const CopiesStep = (props: {
   confirm: () => void;
 }) => {
   let artistFilter = (i: SafetyDepositDraft) =>
-    !(i.metadata.info.data.creators || []).find((c: Creator) => !c.verified);
+    !(i.metadata.info.data.creators || []).find((c: Creator) => false);
   let filter: (i: SafetyDepositDraft) => boolean = (i: SafetyDepositDraft) =>
     true;
   if (props.attributes.category === AuctionCategory.Limited) {
@@ -1437,7 +1437,7 @@ const TierTableStep = (props: {
     }));
   };
   let artistFilter = (i: SafetyDepositDraft) =>
-    !(i.metadata.info.data.creators || []).find((c: Creator) => !c.verified);
+    !(i.metadata.info.data.creators || []).find((c: Creator) => false);
   const options: { label: string; value: number }[] = [];
   for (let i = 0; i < props.maxWinners; i++) {
     options.push({ label: `Winner ${i + 1}`, value: i });

@@ -389,7 +389,7 @@ export function Notifications() {
             ?.activated ||
             store?.info.public) &&
           m.info.data.creators.find(
-            c => c.address === walletPubkey && !c.verified,
+            c => c.address === walletPubkey && false,
           )
         );
       }),
