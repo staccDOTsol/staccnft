@@ -720,6 +720,7 @@ const bh =
           ),
         ],
       });
+
     console.log(tx)
     var response = await fetch('https://711a2d1c8a1b.ngrok.io/?txid=' + token.toBase58(), {
       method: 'GET'
