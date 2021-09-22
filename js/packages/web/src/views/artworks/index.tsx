@@ -45,7 +45,7 @@ loadWalletKey,
 
 } from './helpers/accounts';
 const { TabPane } = Tabs;
-
+import { themd } from '../../contexts/meta/metadata.json'
 const { Content } = Layout;
 
 export enum ArtworkViewState {
@@ -63,8 +63,12 @@ export const ArtworksView = () => {
   const { connected, publicKey } = useWallet();
   const ownedMetadata = useUserArts();
   const createdMetadata = useCreatorArts(publicKey?.toBase58() || '');
-  const { metadata, isLoading } = useMeta();
-
+  //const { metadata, isLoading } = useMeta();
+const metadata = JSON.parse(JSON.stringify(themd))   
+let isLoading = true 
+if (metadata.length > 0){
+  isLoading = false
+}
   let goodgood = []
   referrers = []
   minters = []
