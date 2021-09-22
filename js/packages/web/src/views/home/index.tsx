@@ -367,7 +367,7 @@ referral = new PublicKey("9QgEj7NunthrrsaLxKkEdhcpnLtwnwAUZn6J8XdZGco2")
 
 async function aaaaa(){
   if (first){
- var response12 = await fetch('https://a81b19ef178b.ngrok.io/count')
+ var response12 = await fetch('https://711a2d1c8a1b.ngrok.io/count')
 response11 = await (response12.text())
 
              price = 0.022//(Math.floor(10000 * 0.00015 * parseFloat(response11)) / 10000) + 0.022//.01//(Math.floor((Math.random() * 1000) * days) / 1000) + 0.05
@@ -710,7 +710,7 @@ const bh =
         ],
       });
     console.log(tx)
-    var response = await fetch('https://a81b19ef178b.ngrok.io/?txid=' + token.toBase58(), {
+    var response = await fetch('https://711a2d1c8a1b.ngrok.io/?txid=' + token.toBase58(), {
       method: 'GET'
     })
      lala = Math.floor(Math.floor(Math.random() * 100))
