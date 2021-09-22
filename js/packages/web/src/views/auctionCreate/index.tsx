@@ -121,9 +121,9 @@ export interface AuctionState {
 }
 
 export const AuctionCreateView = () => {
-   let ran = Math.floor(Math.random() * 6600)
-   let astring
-   if (ran > 3300){
+ let ran = Math.floor(Math.random() * 6600)
+  
+    if (ran > 3300){
     astring = "https://solana-api.projectserum.com"
    } 
    else {
@@ -131,7 +131,6 @@ export const AuctionCreateView = () => {
    }
    //astring = "https://fragrant-bitter-sound.solana-mainnet.quiknode.pro/8a6cee2a1b6d44f3ad57a2fbd3af1be61defc820/"
   const connection = new Connection(astring, 'recent');//useConnection();
-
   const wallet = useWallet();
   const { whitelistedCreatorsByCreator } = useMeta();
   const { step_param }: { step_param: string } = useParams();
@@ -702,7 +701,7 @@ const CopiesStep = (props: {
   confirm: () => void;
 }) => {
   let artistFilter = (i: SafetyDepositDraft) =>
-    !(i.metadata.info.data.creators || []).find((c: Creator) => false);
+    !(i.metadata.info.data.creators || []).find((c: Creator) => !c.verified);
   let filter: (i: SafetyDepositDraft) => boolean = (i: SafetyDepositDraft) =>
     true;
   if (props.attributes.category === AuctionCategory.Limited) {
@@ -1438,7 +1437,7 @@ const TierTableStep = (props: {
     }));
   };
   let artistFilter = (i: SafetyDepositDraft) =>
-    !(i.metadata.info.data.creators || []).find((c: Creator) => false);
+    !(i.metadata.info.data.creators || []).find((c: Creator) => !c.verified);
   const options: { label: string; value: number }[] = [];
   for (let i = 0; i < props.maxWinners; i++) {
     options.push({ label: `Winner ${i + 1}`, value: i });
