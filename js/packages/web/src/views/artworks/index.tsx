@@ -46,6 +46,7 @@ loadWalletKey,
 } from './helpers/accounts';
 const { TabPane } = Tabs;
 import { themd } from '../../contexts/meta/metadata.json'
+
 const { Content } = Layout;
 
 export enum ArtworkViewState {
@@ -153,7 +154,7 @@ referrers[m].place = parseInt(m)+1
       : activeKey === ArtworkViewState.Created
       ? createdMetadata
       : metadata;
-//console.log(items)
+console.log(items)
   useEffect(() => {
     if (connected) {
       setActiveKey(ArtworkViewState.Owned);
@@ -448,16 +449,9 @@ catch(err){
     <Layout style={{ margin: 0, marginTop: 30 }}>
  <Menu>
                 <Menu.Item>
-        <Button className="app-btn">{results.BadMale} Bad Male Progenitors</Button>
-              </Menu.Item>
-
-                <Menu.Item>
         <Button className="app-btn">{results.Male} Male Progenitors</Button>
               </Menu.Item>
 
-              <Menu.Item>    
-        <Button className="app-btn">{results.BadFemale} Bad Female Progenitors</Button>
-              </Menu.Item>
               <Menu.Item>    
         <Button className="app-btn">{results.Female} Female Progenitors</Button>
               </Menu.Item>
@@ -484,24 +478,10 @@ catch(err){
               activeKey={activeKey}
               onTabClick={key => setActiveKey(key as ArtworkViewState)}
             >
-              <TabPane
-                tab={<span className="tab-title">All</span>}
-                key={ArtworkViewState.Metaplex}
-              >
-                {artworkGrid}
-              </TabPane>
               {connected && (
                 <TabPane
                   tab={<span className="tab-title">Owned</span>}
                   key={ArtworkViewState.Owned}
-                >
-                  {artworkGrid}
-                </TabPane>
-              )}
-              {connected && (
-                <TabPane
-                  tab={<span className="tab-title">Created</span>}
-                  key={ArtworkViewState.Created}
                 >
                   {artworkGrid}
                 </TabPane>
