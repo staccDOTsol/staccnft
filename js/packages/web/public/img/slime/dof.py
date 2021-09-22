@@ -36,9 +36,9 @@ while count < 10000:
             shutil.copy(str(abc) + '.png', str(count) + '.png')
          except:
             abc2=123
-         job = ['plasmid', 'goop'][abc]
+         job = ['plasmid', 'goop'][random.randint(0,1)]
          abc = abc + 1
-         if abc >= 2:
+         if abc >= 12:
             abc = 0
          mult = 2
          if count > 200: 

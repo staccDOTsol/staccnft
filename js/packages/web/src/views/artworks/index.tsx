@@ -180,7 +180,21 @@ var jsmetadata = JSON.parse(arweave123)
 
 console.log('tmd')
 console.log(tokenmd)
-if (jsmetadata.seller_fee_basis_points == undefined || jsmetadata.seller_fee_basis_points == 0 || theua != 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
+
+let av 
+let gogo2 = true
+  for (var v in jsmetadata.attributes){
+     if (jsmetadata.attributes[v].trait_type == 'Art Version'){
+      av = parseInt(jsmetadata.attributes[v].value)
+gogo2 = false
+     }
+     }
+    if (gogo2 && jsmetadata.name.indexOf('Slime') != -1){
+      
+      jsmetadata.attributes.push({'trait_type': 'Art Version', 'value': '2.0'})
+}
+
+if (true){
 //console.log(jsmetadata)
 var gogo123 = true
 for (var c in tokenmd.creators){
@@ -269,7 +283,6 @@ gogo = false
       }
       jsmetadata.attributes.push({'trait_type': 'Rarity', 'value': '4.1'})
 }
-
 const image = '0.png'
       //const imageName = path.basename(image);
       const index = '0';//ran.toString()
@@ -322,7 +335,7 @@ sex = 'dagron/0.png'
 }
 
 else if (tokenmd.name.includes('Slime')){
-sex = 'slime/0.png'
+sex = 'slime/' + Math.floor(Math.random() * 12) + '.png'
 }
       const storageCost = 10;
   // //console.log(manifest)
