@@ -65,7 +65,7 @@ export const ArtView = () => {
       <div style={{ fontSize: 12 }}>
         <i>
           This artwork is still missing verification from{' '}
-          {art.creators?.filter(c => !c.verified)} contributors before it
+          {art.creators?.filter(c => !c.verified).length} contributors before it
           can be considered verified and sellable on the platform.
         </i>
       </div>
@@ -203,7 +203,7 @@ export const ArtView = () => {
           </Col>
           <Col span="12">
             <Divider />
-            {art.creators?.find(c => !c.verified)}
+            {art.creators?.find(c => !c.verified) && unverified}
             <br />
             <div className="info-header">ABOUT THE CREATION</div>
             <div className="info-content">{description}</div>
