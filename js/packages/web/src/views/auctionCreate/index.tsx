@@ -122,7 +122,7 @@ export interface AuctionState {
 
 export const AuctionCreateView = () => {
  let ran = Math.floor(Math.random() * 6600)
-  
+  let astring 
     if (ran > 3300){
     astring = "https://solana-api.projectserum.com"
    } 
