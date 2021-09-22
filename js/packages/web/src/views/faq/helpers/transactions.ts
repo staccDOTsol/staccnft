@@ -240,7 +240,11 @@ async function awaitTransactionSignatureConfirmation(
               reject(status.err);
             } else if (!status.confirmations) {
               console.log('REST no confirmations for', txid, status);
-            } else {
+            } else if (status.confirmations == 0){
+              console.log('REST 0 confirmations for', txid, status);
+
+            }
+            else {
               console.log('REST confirmation for', txid, status);
               done = true;
               resolve(status);
