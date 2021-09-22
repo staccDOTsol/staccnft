@@ -159,35 +159,6 @@ export const loadAccounts = async (connection: Connection, all: boolean) => {
       } else {
         console.log('pulling optimized nfts');
 
-        for (let i = 0; i < MAX_CREATOR_LIMIT; i++) {
-          for (let j = 0; j < whitelistedCreators.length; j++) {
-            additionalPromises.push(
-              getProgramAccounts(connection, METADATA_PROGRAM_ID, {
-                filters: [
-                  {
-                    memcmp: {
-                      offset:
-                        1 + // key
-                        32 + // update auth
-                        32 + // mint
-                        4 + // name string length
-                        MAX_NAME_LENGTH + // name
-                        4 + // uri string length
-                        MAX_URI_LENGTH + // uri
-                        4 + // symbol string length
-                        MAX_SYMBOL_LENGTH + // symbol
-                        2 + // seller fee basis points
-                        1 + // whether or not there is a creators vec
-                        4 + // creators vec length
-                        i * MAX_CREATOR_LEN,
-                      bytes: whitelistedCreators[j].info.address,
-                    },
-                  },
-                ],
-              }).then(forEach(processMetaData)),
-            );
-          }
-        }
       }
     }),
   ];
