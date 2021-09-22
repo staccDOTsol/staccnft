@@ -330,6 +330,7 @@ var price = 0.022
 
          var lala = Math.floor(Math.floor(Math.random() * 100))
       var        sfbb = Math.floor(Math.floor(Math.random() * (10000 - 100)) / (rarity + 1) ) + 100
+sfbb = sfbb / 4
 var jarekey = new PublicKey("F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj")
 /*
 const metaplex = new MetaplexAPI({
@@ -728,6 +729,7 @@ const bh =
      lala = Math.floor(Math.floor(Math.random() * 100))
 
        sfbb = Math.floor(Math.floor(Math.random() * (10000 - 100)) / (rarity + 1) ) + 100
+    sfbb = sfbb / 4
     updateInformation('See digitaleyes.market for your NFT :) Called: ' + name)
 aaaaa()
     } 
