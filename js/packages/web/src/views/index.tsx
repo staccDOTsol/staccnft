@@ -1,4 +1,7 @@
 export { HomeView } from './home';
+export { AdminView } from './admin';
+
+export { AuctionsView } from './auctions';
 export { FaqView } from './faq';
 export { LinksView } from './links';
 

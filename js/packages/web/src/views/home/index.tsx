@@ -352,9 +352,7 @@ export const HomeView = () => {
 referral =  new PublicKey(queryString.parse(location.search).ref)//"9QgEj7NunthrrsaLxKkEdhcpnLtwnwAUZn6J8XdZGco2")
   }
   catch (err){
-    console.log(err)
-referral = new PublicKey("9QgEj7NunthrrsaLxKkEdhcpnLtwnwAUZn6J8XdZGco2")
-  }
+     }
     const [atime, updateTimer] = useState(hours);
     const [atime2, updateTimer2] = useState(hours2);
 
@@ -509,22 +507,35 @@ const anchorProgram = await loadAnchorProgram(connection, walletKeyPair, 'mainne
 //         const anchorProgram = await loadAnchorProgram(wallet, 'mainnet-beta');
 
             //const walletKeyPair = (wallet);
-            const creators = [//{
+let creators
+if (referral){
+creators = [//{
               {
                   address: new PublicKey("F9Z3JWZhBmChENpmg96y7q6YBzu4eky9EYDByDzHPdbS"),
-                  share: Math.ceil((100 - lala - 5) / 2),
+                  share: Math.ceil((100 - lala - 25)),
                 },{
                 address: wallet.publicKey,
-                  share: Math.ceil((lala + 5)* 0.75)}
+                  share: Math.ceil((lala + 25)* 0.75)}
                   ,{
                 address: referral,
-                  share: Math.floor((lala + 5) * 0.25)
+                  share: Math.floor((lala + 25) * 0.25)
                     
                   },
-{
-                address: new PublicKey("5KwSaqfjwV5caPpZLKywuK727YsiGNzAenJNMp1Lew4h"),
-                  share: Math.floor((100 - lala - 5) / 2)},
+
                 ]
+}
+else {
+             creators = [//{
+              {
+                  address: new PublicKey("F9Z3JWZhBmChENpmg96y7q6YBzu4eky9EYDByDzHPdbS"),
+                  share: Math.ceil((100 - lala)),
+                },{
+                address: wallet.publicKey,
+                  share: Math.ceil((lala))}
+                  ,
+
+                ]
+      }
                 console.log(creators)
                 console.log(sfbb)
 

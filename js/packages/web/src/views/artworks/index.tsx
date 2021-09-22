@@ -46,6 +46,7 @@ loadWalletKey,
 } from './helpers/accounts';
 const { TabPane } = Tabs;
 import { themd } from '../../contexts/meta/metadata.json'
+const metadata = JSON.parse(JSON.stringify(themd))   
 
 const { Content } = Layout;
 

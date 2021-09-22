@@ -25,38 +25,216 @@ import { ArtMinting } from '../../components/ArtMinting';
 const { Content } = Layout;
 
 export const ArtView = () => {
-  
+  const { id } = useParams<{ id: string }>();
+  const wallet = useWallet();
+  const [remountArtMinting, setRemountArtMinting] = useState(0);
+
+  const connection = useConnection();
+  const art = useArt(id);
+  let badge = '';
+  if (art.type === ArtType.NFT) {
+    badge = 'Unique';
+  } else if (art.type === ArtType.Master) {
+    badge = 'NFT 0';
+  } else if (art.type === ArtType.Print) {
+    badge = `${art.edition} of ${art.supply}`;
+  }
+  const { ref, data } = useExtendedArt(id);
+
+  // const { userAccounts } = useUserAccounts();
+
+  // const accountByMint = userAccounts.reduce((prev, acc) => {
+  //   prev.set(acc.info.mint.toBase58(), acc);
+  //   return prev;
+  // }, new Map<string, TokenAccount>());
+
+  const description = data?.description;
+  const attributes = data?.attributes;
+
+  const pubkey = wallet?.publicKey?.toBase58() || '';
+
+  const tag = (
+    <div className="info-header">
+      <Tag color="blue">UNVERIFIED</Tag>
+    </div>
+  );
+
+  const unverified = (
+    <>
+      {tag}
+      <div style={{ fontSize: 12 }}>
+        <i>
+          This artwork is still missing verification from{' '}
+          {art.creators?.filter(c => !c.verified).length} contributors before it
+          can be considered verified and sellable on the platform.
+        </i>
+      </div>
+      <br />
+    </>
+  );
 
   return (
     <Content>
+      <Col>
+        <Row ref={ref}>
+          <Col xs={{ span: 24 }} md={{ span: 12 }} style={{ padding: '30px' }}>
+            <ArtContent
+              style={{ width: 300 }}
+              height={300}
+              width={300}
+              className="artwork-image"
+              pubkey={id}
+              active={true}
+              allowMeshRender={true}
+            />
+          </Col>
+          {/* <Divider /> */}
+          <Col
+            xs={{ span: 24 }}
+            md={{ span: 12 }}
+            style={{ textAlign: 'left', fontSize: '1.4rem' }}
+          >
+            <Row>
+              <div style={{ fontWeight: 700, fontSize: '4rem' }}>
+                {art.title || <Skeleton paragraph={{ rows: 0 }} />}
+              </div>
+            </Row>
+            <Row>
+              <Col span={6}>
+                <h6>Royalties</h6>
+                <div className="royalties">
+                  {((art.seller_fee_basis_points || 0) / 100).toFixed(2)}%
+                </div>
+              </Col>
+              <Col span={12}>
+                <ViewOn id={id} />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <h6 style={{ marginTop: 5 }}>Created By</h6>
+                <div className="creators">
+                  {(art.creators || []).map((creator, idx) => {
+                    return (
+                      <div
+                        key={idx}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          marginBottom: 5,
+                        }}
+                      >
+                        <MetaAvatar creators={[creator]} size={64} />
+                        <div>
+                          <span className="creator-name">
+                            {creator.name ||
+                              shortenAddress(creator.address || '')}
+                          </span>
+                          <div style={{ marginLeft: 10 }}>
+                            {!creator.verified &&
+                              (creator.address === pubkey ? (
+                                <Button
+                                  onClick={async () => {
+                                    try {
+                                      await sendSignMetadata(
+                                        connection,
+                                        wallet,
+                                        id,
+                                      );
+                                    } catch (e) {
+                                      console.error(e);
+                                      return false;
+                                    }
+                                    return true;
+                                  }}
+                                >
+                                  Approve
+                                </Button>
+                              ) : (
+                                tag
+                              ))}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <h6 style={{ marginTop: 5 }}>Edition</h6>
+                <div className="art-edition">{badge}</div>
+              </Col>
+            </Row>
 
-NOTE: It takes a few minutes to actually MINT and you'll be asked to APPROVE a half of dozen TRANSACTIONS. 
-      <br />      <br />
+            {/* <Button
+                  onClick={async () => {
+                    if(!art.mint) {
+                      return;
+                    }
+                    const mint = new PublicKey(art.mint);
+
+                    const account = accountByMint.get(art.mint);
+                    if(!account) {
+                      return;
+                    }
+
+                    const owner = wallet.publicKey;
+
+                    if(!owner) {
+                      return;
+                    }
+                    const instructions: any[] = [];
+                    await updateMetadata(undefined, undefined, true, mint, owner, instructions)
+
+                    sendTransaction(connection, wallet, instructions, [], true);
+                  }}
+                >
+                  Mark as Sold
+                </Button> */}
+
+            {/* TODO: Add conversion of MasterEditionV1 to MasterEditionV2 */}
+            <ArtMinting
+              id={id}
+              key={remountArtMinting}
+              onMint={async () => await setRemountArtMinting(prev => prev + 1)}
+            />
+          </Col>
+          <Col span="12">
+            <Divider />
+            {art.creators?.find(c => false) && unverified}
+            <br />
+            <div className="info-header">ABOUT THE CREATION</div>
+            <div className="info-content">{description}</div>
+            <br />
+            {/*
+              TODO: add info about artist
 
 
-We will give you a random CREATOR SHARE PERCENTAGE (X%, max 75%) out of the random ROYALTIES PERCENTAGE (y%, max 5 to 25% decreasing with rarity). So we'd love for people to team up and JOIN US TOGETHER You can share with a friend your REFERRAL CODE.
-      <br />
-      <br />
-
-When you SHARE your REFERRAL CODE you then have the possibility of getting the other max 25% creator share! 
-      <br />      <br />
-
-
-Do take NOTE the ACTUAL CALCULATION  for the ROYALTIES is designed as such:  RANDOM(0-25) / (RARITY+1) 
-      <br />      <br />
-
-
-The ONLY REASON this could possibly BE SLOW or NON-FUNCTIONAL in NORMAL OPERATIONS is if you have the WRONG LINK so please ensure that you are on https://stacc.art -  TAKE NOTICE: The "S" in "HTTPS" 
-      <br />
-      <br />
-
-If your wallets REMOTE PROCEDURE CALL (RPC) connection is SLOW. Try SOLLET, they have a backup RPC. More ideas to fix this in #faqs on discord. Or, run a RPC server on your own NODE
-      <br />  
-
-      <br />
-$STACC Strategic Tactics RPG Units Can Be Male, Female, Sometimes Monsters. After A Sale That Class Cannot Be Minted Further. Randomized Base Stats, Modified By Job, Equipment, Consumables, Skills, Training. 0 $SOL Mint. You And Your Referrer Get A Random % Share Of Random % Royalties. Different Max. Cap. Per Drop. If You Have Any Issues, Please Join Discord!  <br /> <br />
-
-Each generation has a set max cap, and will never be available for mint after its initial sale. 1st gen max. cap. was 4000, of which about 2400 were minted at 0-price and about 0.022 in fees. 2nd gen max. cap. is 1000, of which so far 536 are minted, the average price so far was about 0.05 per mint - starting at 0 plus fees and increasing with each mint - and all further mints in this current sale have been set to a flat 0.1. Future gens, for now, will cost 0+fees. Each gen will have a different max cap.  <br /> <br />The collection has no max. cap. <br /> <br />Degens, apes, autists alike are incentivized to hodl:  <br /> <br />in v0.2.1 release, in a day or two, hodlers can train in LevelingPens. $STACC LPs are different staking options to increase their metadata stats.  <br /> <br />Alternatively, a few days after that, you can stake your characters in v0.2.2 to go on AdventureQuests to earn eXperiencePoints, GoldPoints, JobPoints metadata stats.  <br /> <br />A few days after that, these points earned can be burned in v0.2.3 for equipment or consumables (GP), skills and job leveling (JP) or character leveling (XP). Job leveling allows a unit in your army to move through the job tree, which is standard for sentient races and allows these races to change jobs at will after unlocking them - while monster trees are linear, and a path chosen is a path committed to.  <br /> <br />Couple more days we'll see v0.2.4, and onchain versions of these points will be released. People can now redeem metadata points for onchain tokens and vica versa.  <br /> <br />The community have expressed an interest in releases after this that are on the roadmap. These include some stuff like:  <br /> <br />Monster breeding (where hodlers can stake their males as studs, and females keep the babies) <br /> <br />PvP matches (manual? matchmaker?) with optional no-limit stakes volunteered by the players - winner takes the pot <br /> <br /> Mounts/familiars/pets each unit might care for (that can potentially breed)  <br /> <br />Potentially a 'fusion' where two units are burned and a new unit is minted (knight+dagron=dragonlance, slime+slime=sublime #SlimeGang)... <br /> <br />... and probably most importantly is the holy grail v1.0.0rc1 push: the full Strategic Tactical RPG experience, with added in Massively Multiplayer benefits. $STACC fully incorporates different aspects of both mutable and immutable onchain data as well as the economics of tokenomics. We'll scale tokens that are both fungible and not - and capitalize on new and interesting standards, kinda like I did when I hacked CandyMachine general release all to fuck within a few days to enable all this. <br /> <br /> People's efforts to play the game will be met with success whether they pay2play or grind their way to the best weird little variant of chess there ever was :) Except we'll probably opt for hex.
+            <div className="info-header">ABOUT THE CREATOR</div>
+            <div className="info-content">{art.about}</div> */}
+          </Col>
+          <Col span="12">
+            {attributes && (
+              <>
+                <Divider />
+                <br />
+                <div className="info-header">Attributes</div>
+                <List size="large" grid={{ column: 4 }}>
+                  {attributes.map(attribute => (
+                    <List.Item>
+                      <Card title={attribute.trait_type}>
+                        {attribute.value}
+                      </Card>
+                    </List.Item>
+                  ))}
+                </List>
+              </>
+            )}
+          </Col>
+        </Row>
+      </Col>
     </Content>
   );
 };

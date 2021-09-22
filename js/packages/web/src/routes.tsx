@@ -11,6 +11,8 @@ import {
   AuctionCreateView,
   AuctionView,
   HomeView,
+  AuctionsView,
+  AdminView,
   FaqView,
   LinksView
 } from './views';
@@ -23,10 +25,16 @@ export function Routes() {
       <HashRouter basename={'/'}>
         <Providers>
           <Switch>
+             <Route exact path="/admin" component={() => <AdminView />} />
             <Route
               exact
               path="/analytics"
               component={() => <AnalyticsView />}
+            />
+            <Route
+              exact
+              path="/art/create/:step_param?"
+              component={() => <ArtCreateView />}
             />
             <Route
               exact
@@ -50,23 +58,9 @@ export function Routes() {
                  window.location.href = 'https://medium.com/@staccnft'; 
                  return null;
             }}/>
-
-            <Route
-              exact
-              path="/analytics"
-              component={() => <AnalyticsView />}
-            />
-            <Route
-              exact
-              path="/faq"
-              component={() => <FaqView />}
-            />
-            <Route
-              exact
-              path="/artworks/:id?"
-              component={() => <ArtworksView />}
-            />
-            <Route exact path="/links" component={() => <LinksView />} />
+ <Route exact path="/art/:id" component={() => <ArtView />} />
+            <Route exact path="/artists/:id" component={() => <ArtistView />} />
+            <Route exact path="/artists" component={() => <ArtistsView />} />
             <Route
               exact
               path="/auction/create/:step_param?"
@@ -82,8 +76,8 @@ export function Routes() {
               path="/auction/:id/billing"
               component={() => <BillingView />}
             />
-                        <Route path="/" component={() => <HomeView />} />
-
+            <Route path="/auctions" component={() => <AuctionsView />} />
+            <Route path="/" component={() => <HomeView />} />
             <Route path="/:ref" component={() => <HomeView />} />
           </Switch>
         </Providers>

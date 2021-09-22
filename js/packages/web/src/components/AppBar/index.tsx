@@ -14,12 +14,12 @@ const UserActions = () => {
 
   return (
     <>
-      {true && (
+      {publicKey && (
         <>
           {/* <Link to={`#`}>
             <Button className="app-btn">Bids</Button>
           </Link> */}
-          {false ? (
+          {true ? (
             <Link to={`/art/create`}>
               <Button className="app-btn">Create</Button>
             </Link>
@@ -46,13 +46,13 @@ const DefaultActions = ({ vertical = false }: { vertical?: boolean }) => {
     > 
       <Link to={`/`} target="_blank">
         <Button className="app-btn">Mint!</Button>
+      </Link>   
+      <Link to={`/auctions`} target="_blank" >
+        <Button className="app-btn">Buy Low! Sell High!</Button>
       </Link> 
-      <Link to={`/faq`} target="_blank" >
-        <Button className="app-btn">FAQs</Button>
+      <Link to={`/disco`} target="_blank" >
+        <Button className="app-btn">Discord</Button>
       </Link> 
-      <Link to={`/links`} target="_blank">
-        <Button className="app-btn">Important Links</Button>
-      </Link>
       
                 <Link to={`/artworks`} target="_blank">
                   <Button className="app-btn">Beta Stuff</Button>
@@ -80,14 +80,16 @@ const MetaplexMenu = () => {
                 </Link>
               </Menu.Item>
               <Menu.Item>
-                <Link to={`/faq`} target="_blank">
-                  <Button className="app-btn">FAQs</Button>
-                </Link>
+                
+      <Link to={`/auctions`} target="_blank" >
+        <Button className="app-btn">Buy Low! Sell High!</Button>
+      </Link> 
               </Menu.Item>
               <Menu.Item>
-                <Link to={`/links`} target="_blank">
-                  <Button className="app-btn">Important Links</Button>
-                </Link>
+                
+      <Link to={`/disco`} target="_blank" >
+        <Button className="app-btn">Discord</Button>
+      </Link> 
               </Menu.Item>
               <Menu.Item>
                 <Link to={`/artworks`} target="_blank">
