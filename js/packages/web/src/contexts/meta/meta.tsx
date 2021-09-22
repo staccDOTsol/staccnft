@@ -126,16 +126,16 @@ export function MetaProvider({ children = null as any }) {
 
       console.log('-----> Query started');
 
-//      const nextState = await loadAccounts(connection, all);
+      const nextState = await loadAccounts(connection, all);
 
       console.log('------->Query finished');
 
-  //    setState(nextState);
+      setState(nextState);
 
       setIsLoading(false);
       console.log('------->set finished');
 
-     // updateMints(nextState.metadataByMint);
+      updateMints(nextState.metadataByMint);
     }
     })();
   }, [connection, setState, updateMints, storeAddress, isReady]);
@@ -148,7 +148,7 @@ export function MetaProvider({ children = null as any }) {
   );
 
   const store = state.store;
-  const whitelistedCreatorsByCreator = [new PublicKey("HRtqsVx8KK1FLXbGRaKT479RJM6Q33aTsB99fbCpGkH7")];
+  const whitelistedCreatorsByCreator = state.whitelistedCreatorsByCreator;
 
   useEffect(() => {
     if (isLoading) {

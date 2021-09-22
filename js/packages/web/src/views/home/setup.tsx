@@ -72,7 +72,7 @@ export const SetupView = () => {
           to configure store.
         </p>
       )}
-      {wallet.connected && !store && (
+      {wallet.connected && true && (
         <>
           <p>Store is not initialized yet</p>
           <p>There must be some ◎ SOL in the wallet before initialization.</p>
