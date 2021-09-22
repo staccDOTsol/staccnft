@@ -65,7 +65,7 @@ export const ArtView = () => {
       <div style={{ fontSize: 12 }}>
         <i>
           This artwork is still missing verification from{' '}
-          {art.creators?.filter(c => !c.verified} contributors before it
+          {art.creators?.filter(c => !c.verified)} contributors before it
           can be considered verified and sellable on the platform.
         </i>
       </div>
