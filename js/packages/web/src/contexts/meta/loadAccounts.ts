@@ -197,7 +197,7 @@ export const loadAccounts = async (connection: Connection, all: boolean) => {
   await postProcessMetadata(tempCache, all);
   console.log('Metadata size', tempCache.metadata.length);
 
-  if (additionalPromises.length > 0) {
+  if (false) {
     console.log('Pulling editions for optimized metadata');
     let setOf100MetadataEditionKeys: string[] = [];
     const editionPromises: Promise<{
