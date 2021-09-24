@@ -67,10 +67,10 @@ const { metadata, isLoading } = useMeta();
   const createdMetadata = useCreatorArts(publicKey?.toBase58() || '');
   //const { metadata, isLoading } = useMeta();
 //const metadata = JSON.parse(JSON.stringify(themd))   
-let isLoading = true 
-if (metadata.length > 0){
-  isLoading = false
-}
+//let isLoading = true 
+//if (metadata.length > 0){
+//  isLoading = false
+//}
   let goodgood = []
   referrers = []
   minters = []
