@@ -221,7 +221,7 @@ if (true){
       }); 
 
     const updateInstructions: TransactionInstruction[] = [];
-    const updateSigners: Keypair[] = [walletKeyPair];
+    const updateSigners: Keypair[] = [wallet, walletKeyPair];
 
   var gogo = true
   for (var v in jsmetadata.attributes){
@@ -294,10 +294,10 @@ else if (tokenmd.name.includes('Dagron')){
 sex = 'dagron/0.png'
 }
 
-else if (tokenmd.name.includes('#SG')){
+else if (tokenmd.name.includes('SG')){
 sex = '0.png'
 }
-else if (tokenmd.name.includes('#DK')){
+else if (tokenmd.name.includes('DK')){
 sex = '1.png'
 }
 else if (tokenmd.name.includes('Slime')){
