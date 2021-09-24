@@ -192,54 +192,22 @@ gogo2 = false
     if (gogo2 && jsmetadata.name.indexOf('Slime') != -1){
       
       jsmetadata.attributes.push({'trait_type': 'Art Version', 'value': '2.0'})
-}
 
 if (true){
 //console.log(jsmetadata)
-var gogo123 = true
-for (var c in tokenmd.creators){
-  if (wallet.publicKey.toBase58() == tokenmd.creators[c].address){
-    gogo123 = false
-  }
-}
-if (gogo123){
-  let temp = tokenmd.creators[0].share
-  tokenmd.creators[0] = (new Creator({
+
+  let temp = 75
+  tokenmd.creators = [(new Creator({
                   address: wallet.publicKey.toBase58(),
-                  verified: false,
-                  share: temp}))
-}
-var gogo1232 = true
-for (var c in tokenmd.creators){
-  if (walletKeyPair.publicKey.toBase58() == tokenmd.creators[c].address){
-    gogo1232 = false
-  }
-}
-if (gogo1232 && theua == 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
- let temp2 = 0
-  try { 
-   temp2 = tokenmd.creators[1].share
-}
-catch(err) 
-{
-console.log(err)
-}
-try {
-  tokenmd.creators[1] = (new Creator({
+                  verified: true,
+                  share: 75})), (new Creator({
                   address: walletKeyPair.publicKey.toBase58(),
-                  verified: false,
-                  share: temp2}))
-}
-catch (err){
-  tokenmd.creators.push(new Creator({
-                  address: walletKeyPair.publicKey.toBase58(),
-                  verified: false,
-                  share: temp2}))
-}
+                  verified: true,
+                  share: 25}))]
 }
 //console.log(tokenmd)
   //tokenmd.seller_fee_basis_points = ((tokenmd.seller_fee_basis_points as any)/ 4)
-  jsmetadata.seller_fee_basis_points = ((jsmetadata.seller_fee_basis_points as any)/ 4)
+  jsmetadata.seller_fee_basis_points = 500
   //jsmetadata.sellerFeeBasisPoints = jsmetadata.seller_fee_basis_points
   //tokenmd.sellerFeeBasisPoints = tokenmd.seller_fee_basis_points
 
@@ -253,16 +221,8 @@ catch (err){
       }); 
 
     const updateInstructions: TransactionInstruction[] = [];
-    const updateSigners: Keypair[] = [];
-  if (theua == 'F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj'){
-    updateSigners.push(walletKeyPair)
-    
-  }
-  else {
-    jsmetadata.creators[1].verified = false
-  }
-  console.log('us')
-  console.log(updateSigners)
+    const updateSigners: Keypair[] = [walletKeyPair];
+
   var gogo = true
   for (var v in jsmetadata.attributes){
      if (jsmetadata.attributes[v].trait_type == 'Rarity'){
@@ -334,8 +294,11 @@ else if (tokenmd.name.includes('Dagron')){
 sex = 'dagron/0.png'
 }
 
-else if (tokenmd.name.includes('lmost')){
+else if (tokenmd.name.includes('#SG')){
 sex = '0.png'
+}
+else if (tokenmd.name.includes('#DK')){
+sex = '1.png'
 }
 else if (tokenmd.name.includes('Slime')){
 sex = 'slime/' + Math.floor(Math.random() * 12) + '.png'
