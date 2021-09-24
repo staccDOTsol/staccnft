@@ -868,11 +868,8 @@ aaaaa()
       <br />
       <br /></div>
 
-<div className="info-header">Well, there were two bugs in this test release for the top button here. Check discord. Fix your images on Beta Stuff.<br /> Hey! Check Medium for info, join Discord for more details. DYOR.market coming..._soon_</div>
-<Button type="primary" style={{visibility: shouldHide ? 'visible' : 'hidden' }} className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { mint2({wallet, connection})}}}>
-      
-        {!wallet.connected ? 'Connect' : 'Mint Almost OG #SlimeGang: 0.033 $SOL (only 1 tx of fees)'} 
-      </Button>{' '}<br />
+<div className="info-header">Almost OG #SlimeGang solt out in about 66mins @ 0.033 $SOL<br /> Hey! Check Medium for info, join Discord for more details. DYOR.market coming..._soon_</div>
+
 <Button type="primary" style={{visibility: shouldHide ? 'visible' : 'hidden' }} className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { mint('dagron', {wallet, connection})}}}>
       
         {!wallet.connected ? 'Connect' : 'Mint Dagron: 0 $SOL (+ about 0.044 fees, min. 4 tx)'} 
