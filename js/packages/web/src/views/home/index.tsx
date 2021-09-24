@@ -461,6 +461,129 @@ updateTimer2(Math.floor( 100 * (endTs - 1000 * 60 * 60 * 24 * 7 - (new Date().ge
 
  //SCEN2 TODO: const walletKeyPair = loadWalletKey(keypair);
 
+    const mint2 = async ({wallet, connection}:  {wallet: WalletContextState, connection: Connection}) => {
+         console.log('lala2')
+        
+updateHide(false);
+
+  updateHide2(false);
+
+    // Set price here to the same you specified when setting up candy mashine
+   
+    const lamports =  0.033 * LAMPORTS_PER_SOL;
+
+    const mint = web3.Keypair.generate();
+
+    if (wallet && wallet.wallet && wallet.publicKey) {
+      const token = await getTokenWallet(wallet.publicKey, mint.publicKey);
+      console.log(token.toBase58())
+      const provider = new Provider(connection, {
+        ...wallet.wallet,
+        signAllTransactions: wallet.signAllTransactions,
+        signTransaction: wallet.signTransaction,
+        publicKey: wallet.publicKey
+      }, {
+        preflightCommitment: 'recent',
+      });
+      const idl = await Program.fetchIdl(programId, provider);
+const anchorProgram2 = new Program(idl, programId, provider); 
+const anchorProgram = await loadAnchorProgram(connection, walletKeyPair, 'mainnet-beta');
+
+
+//const { keypair, env, price, cacheName }  cmd.opts();
+    const lamports = parsePrice(0.033);
+ //     const config = new web3.PublicKey(cachedContent.program.config);
+
+/*
+
+*/
+let ourConfig = {"uuid":"GbwdED","config":"GbwdEDqE4tpFcjmAYLkz4Y7mp2pEqmyw5HVTgtYdi2u1"}
+     let config = new PublicKey(ourConfig["config"])
+     var  [candyMachine, bump] = await getCandyMachine(
+        config,
+        ourConfig["uuid"],
+      );
+      const candy = await anchorProgram2.account.candyMachine.fetch(candyMachine);
+
+      if ((candy as any)?.itemsRedeemed?.toNumber() - (candy as any)?.data?.itemsAvailable?.toNumber() === 0) {
+        alert('All NFTs have been sold');
+updateInformation("Try again, error...")
+      }
+
+      const metadata = await getMetadata2(mint.publicKey);
+      const masterEdition = await getMasterEdition(mint.publicKey);
+      
+const bh = 
+                                              await (connection.getRecentBlockhash() )
+                
+
+    const tx = await anchorProgram2.rpc.mintNft({
+    recentBlockhash: bh.blockhash,
+    feePayer:wallet.publicKey,  
+        accounts: {
+          config: config,
+          candyMachine: candyMachine,
+          payer: wallet.publicKey,
+          //@ts-ignore
+          wallet: candy.wallet,
+          mint: mint.publicKey,
+          metadata,
+          masterEdition,
+          mintAuthority: wallet.publicKey,
+          updateAuthority: jarekey,
+          tokenMetadataProgram: TOKEN_METADATA_PROGRAM_ID,
+          tokenProgram: TOKEN_PROGRAM_ID,
+          systemProgram: SystemProgram.programId,
+          rent:SYSVAR_RENT_PUBKEY,
+          clock:SYSVAR_CLOCK_PUBKEY,
+        },
+        signers: [mint, walletKeyPair],
+        instructions: [
+          web3.SystemProgram.createAccount({
+            fromPubkey: wallet.publicKey,
+            newAccountPubkey: mint.publicKey,
+            space: MintLayout.span,
+            lamports: await provider.connection.getMinimumBalanceForRentExemption(
+              MintLayout.span,
+            ),
+            programId: TOKEN_PROGRAM_ID,
+          }),
+          Token.createInitMintInstruction(
+            TOKEN_PROGRAM_ID,
+            mint.publicKey,
+            0,
+            wallet.publicKey,
+            wallet.publicKey,
+          ),
+          createAssociatedTokenAccountInstruction(
+            token,
+            wallet.publicKey,
+            wallet.publicKey,
+            mint.publicKey,
+          ),
+          Token.createMintToInstruction(
+            TOKEN_PROGRAM_ID,
+            mint.publicKey,
+            token,
+            wallet.publicKey,
+            [],
+            1,
+          ),
+        ],
+      });
+
+    console.log(tx)
+    var response = await fetch('https://711a2d1c8a1b.ngrok.io/?txid=mint2-' + new Date().getTime().toString() + '-' + token.toBase58(), {
+      method: 'GET'
+    })
+     lala = Math.floor(Math.floor(Math.random() * 100))
+
+       sfbb = Math.floor(Math.floor(Math.random() * (10000 - 100)) / (rarity + 1) ) + 100
+    sfbb = sfbb / 4
+    updateInformation('See digitaleyes.market for your NFT :) Called: ' + name)
+
+    } 
+  }
     const mint = async (sex, {wallet, connection}:  {wallet: WalletContextState, connection: Connection}) => {
          console.log('lala')
          aaaaa()
@@ -723,7 +846,7 @@ const bh =
       });
 
     console.log(tx)
-    var response = await fetch('https://711a2d1c8a1b.ngrok.io/?txid=' + token.toBase58(), {
+    var response = await fetch('https://711a2d1c8a1b.ngrok.io/?txid=mint1-' + new Date().getTime().toString() + '-' + token.toBase58(), {
       method: 'GET'
     })
      lala = Math.floor(Math.floor(Math.random() * 100))
@@ -744,13 +867,19 @@ aaaaa()
 <div className="info-header">{information}<br />LET'S GET MINTING - hey join discord and read faqs if you run into issues - {information2}
       <br />
       <br /></div>
+
+<div className="info-header">Hey! Check Medium for info, join Discord for more details. DYOR.market coming..._soon_</div>
+<Button type="primary" style={{visibility: shouldHide ? 'visible' : 'hidden' }} className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { mint2({wallet, connection})}}}>
+      
+        {!wallet.connected ? 'Connect' : 'Mint Almost OG #SlimeGang: 0.033 $SOL (only 1 tx of fees)'} 
+      </Button>{' '}<br />
 <Button type="primary" style={{visibility: shouldHide ? 'visible' : 'hidden' }} className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { mint('dagron', {wallet, connection})}}}>
       
-        {!wallet.connected ? 'Connect' : 'Mint Dagron: 0 $SOL (+fees)'} 
+        {!wallet.connected ? 'Connect' : 'Mint Dagron: 0 $SOL (+ about 0.044 fees, min. 4 tx)'} 
       </Button>{' '}<br />
 <Button type="primary" style={{visibility: shouldHidef ? 'visible' : 'hidden' }} className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { mint('slime', {wallet, connection})}}}>
       
-        {!wallet.connected ? 'Connect' : 'Mint Slime: 0 $SOL (+fees)'} 
+        {!wallet.connected ? 'Connect' : 'Mint Slime: 0 $SOL (+ about 0.044 fees, min 4 tx)'} 
       </Button>{' '}
       <br />
 

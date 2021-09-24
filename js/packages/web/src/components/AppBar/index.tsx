@@ -47,15 +47,15 @@ const DefaultActions = ({ vertical = false }: { vertical?: boolean }) => {
       <Link to={`/`} target="_blank">
         <Button className="app-btn">Mint!</Button>
       </Link>   
-      <Link to={`/auctions`} target="_blank" >
-        <Button className="app-btn">Buy Low! Sell High!</Button>
+      <Link to={`/medium`} target="_blank" >
+        <Button className="app-btn">Medium!</Button>
       </Link> 
       <Link to={`/disco`} target="_blank" >
-        <Button className="app-btn">Discord</Button>
+        <Button className="app-btn">Discord!</Button>
       </Link> 
       
                 <Link to={`/artworks`} target="_blank">
-                  <Button className="app-btn">Beta Stuff</Button>
+                  <Button className="app-btn">Beta Stuff!</Button>
                 </Link>
     </div>
   );
@@ -81,19 +81,19 @@ const MetaplexMenu = () => {
               </Menu.Item>
               <Menu.Item>
                 
-      <Link to={`/auctions`} target="_blank" >
-        <Button className="app-btn">Buy Low! Sell High!</Button>
+      <Link to={`/medium`} target="_blank" >
+        <Button className="app-btn">Medium!</Button>
       </Link> 
               </Menu.Item>
               <Menu.Item>
                 
       <Link to={`/disco`} target="_blank" >
-        <Button className="app-btn">Discord</Button>
+        <Button className="app-btn">Discord!</Button>
       </Link> 
               </Menu.Item>
               <Menu.Item>
                 <Link to={`/artworks`} target="_blank">
-                  <Button className="app-btn">Beta Stuff</Button>
+                  <Button className="app-btn">Beta Stuff!</Button>
                 </Link>
               </Menu.Item>
             </Menu>
