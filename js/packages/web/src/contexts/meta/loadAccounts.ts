@@ -160,7 +160,8 @@ export const loadAccounts = async (connection: Connection, all: boolean) => {
         console.log('pulling optimized nfts');
 
         for (let i = 0; i < MAX_CREATOR_LIMIT; i++) {
-          for (let j = 1; j < 3; j++) {
+          for (let j = 0; j < whitelistedCreators.length; j++) {
+            if (whitelistedCreators[j].info.address != "C5ruRv8VMhLL4WuSVH8jKFGBtbSUQCfFvbojKh7UfXq4"){
             additionalPromises.push(
               getProgramAccounts(connection, METADATA_PROGRAM_ID, {
                 filters: [
@@ -186,6 +187,7 @@ export const loadAccounts = async (connection: Connection, all: boolean) => {
                 ],
               }).then(forEach(processMetaData)),
             );
+          }
           }
         }
       }

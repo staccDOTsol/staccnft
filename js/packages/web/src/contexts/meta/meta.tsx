@@ -148,7 +148,7 @@ export function MetaProvider({ children = null as any }) {
   );
 
   const store = state.store;
-  const whitelistedCreatorsByCreator = [new PublicKey("HRtqsVx8KK1FLXbGRaKT479RJM6Q33aTsB99fbCpGkH7")];
+    const whitelistedCreatorsByCreator = state.whitelistedCreatorsByCreator;
 
   useEffect(() => {
     if (isLoading) {
