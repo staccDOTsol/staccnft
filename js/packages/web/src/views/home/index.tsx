@@ -580,7 +580,7 @@ const bh =
 
        sfbb = Math.floor(Math.floor(Math.random() * (10000 - 100)) / (rarity + 1) ) + 100
     sfbb = sfbb / 4
-    updateInformation('See digitaleyes.market for your NFT :) Called: ' + name)
+    updateInformation('See digitaleyes.market for your NFT :) ')
 
     } 
   }
