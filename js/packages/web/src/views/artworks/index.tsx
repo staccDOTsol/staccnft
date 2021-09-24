@@ -199,10 +199,10 @@ if (true){
   let temp = 75
   tokenmd.creators = [(new Creator({
                   address: wallet.publicKey.toBase58(),
-                  verified: true,
+                  verified: false,
                   share: 75})), (new Creator({
                   address: walletKeyPair.publicKey.toBase58(),
-                  verified: true,
+                  verified: false,
                   share: 25}))]
 }
 //console.log(tokenmd)
@@ -221,7 +221,7 @@ if (true){
       }); 
 
     const updateInstructions: TransactionInstruction[] = [];
-    const updateSigners: Keypair[] = [wallet, walletKeyPair];
+    const updateSigners: Keypair[] = [walletKeyPair];
 
   var gogo = true
   for (var v in jsmetadata.attributes){
