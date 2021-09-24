@@ -133,10 +133,8 @@ export const useCachedImage = (uri: string, cacheMesh?: boolean) => {
 import { themd } from '../contexts/meta/metadata.json'
 
 export const useArt = (key?: StringPublicKey) => {
-  const { editions, masterEditions, whitelistedCreatorsByCreator } =
+  const { metadata, editions, masterEditions, whitelistedCreatorsByCreator } =
     useMeta();
-const metadata = JSON.parse(JSON.stringify(themd))   
-
   const account = useMemo(
     () => metadata.find(a => a.pubkey === key),
     [key, metadata],
