@@ -402,11 +402,15 @@ const thedata = new Data({
         creators: tokenmd.creators,
         sellerFeeBasisPoints: jsmetadata.sellerFeeBasisPoints,
       })
+let theupdatedupdateauthority = theua 
+if (theupdatedupdateauthority == "F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj"){
+  theupdatedupdateauthority = undefined
+}
 //console.log(thedata)
     // TODO: connect to testnet arweave
     await updateMetadata(
        thedata,
-      "F9fER1Cb8hmjapWGZDukzcEYshAUDbSFpbXkj9QuBaQj",
+      theupdatedupdateauthority,
       true,
          items[i].info.mint,//mintkey??
       theua,//payer
