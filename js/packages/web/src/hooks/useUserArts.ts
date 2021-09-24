@@ -5,6 +5,8 @@ import {
   TokenAccount,
   useUserAccounts,
 } from '@oyster/common';
+import { useMeta } from './../contexts';
+
 import BN from 'bn.js';
 import { SafetyDepositDraft } from '../actions/createAuctionManager';
 import {
