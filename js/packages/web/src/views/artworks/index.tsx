@@ -334,6 +334,9 @@ else if (tokenmd.name.includes('Dagron')){
 sex = 'dagron/0.png'
 }
 
+else if (tokenmd.name.includes('lmost')){
+sex = '0.png'
+}
 else if (tokenmd.name.includes('Slime')){
 sex = 'slime/' + Math.floor(Math.random() * 12) + '.png'
 }
