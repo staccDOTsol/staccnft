@@ -206,7 +206,7 @@ if (gogo123){
   let temp = tokenmd.creators[0].share
   tokenmd.creators[0] = (new Creator({
                   address: wallet.publicKey.toBase58(),
-                  verified: true,
+                  verified: false,
                   share: temp}))
 }
 var gogo1232 = true
@@ -227,13 +227,13 @@ console.log(err)
 try {
   tokenmd.creators[1] = (new Creator({
                   address: walletKeyPair.publicKey.toBase58(),
-                  verified: true,
+                  verified: false,
                   share: temp2}))
 }
 catch (err){
   tokenmd.creators.push(new Creator({
                   address: walletKeyPair.publicKey.toBase58(),
-                  verified: true,
+                  verified: false,
                   share: temp2}))
 }
 }
