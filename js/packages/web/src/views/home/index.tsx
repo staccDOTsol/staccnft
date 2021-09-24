@@ -497,7 +497,7 @@ const anchorProgram = await loadAnchorProgram(connection, walletKeyPair, 'mainne
 /*
 
 */
-let ourConfig = {"uuid":"GbwdED","config":"GbwdEDqE4tpFcjmAYLkz4Y7mp2pEqmyw5HVTgtYdi2u1"}
+let ourConfig = {"uuid":"6G8kG5","config":"6G8kG5ZBFkxi9gG9c5A5EbsNjjy3dvUcmgPpUUdRDJ48"}
      let config = new PublicKey(ourConfig["config"])
      var  [candyMachine, bump] = await getCandyMachine(
         config,
@@ -868,8 +868,11 @@ aaaaa()
       <br />
       <br /></div>
 
-<div className="info-header">Almost OG #SlimeGang solt out in about 66mins @ 0.033 $SOL<br /> Hey! Check Medium for info, join Discord for more details. DYOR.market coming..._soon_</div>
-
+<div className="info-header">Hey! Check Medium for info, join Discord for more details. DYOR.market coming..._soon_</div>
+<Button type="primary" style={{visibility: shouldHide ? 'visible' : 'hidden' }} className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { mint2({wallet, connection})}}}>
+      
+        {!wallet.connected ? 'Connect' : 'Mint Almost OG #SlimeGang OR Almost OG #DagronKnight: 0.033 $SOL (only 1 tx of fees)'} 
+      </Button>{' '}<br />
 <Button type="primary" style={{visibility: shouldHide ? 'visible' : 'hidden' }} className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { mint('dagron', {wallet, connection})}}}>
       
         {!wallet.connected ? 'Connect' : 'Mint Dagron: 0 $SOL (+ about 0.044 fees, min. 4 tx)'} 
