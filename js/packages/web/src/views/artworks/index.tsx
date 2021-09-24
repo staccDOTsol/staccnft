@@ -45,8 +45,8 @@ loadWalletKey,
 
 } from './helpers/accounts';
 const { TabPane } = Tabs;
-import { themd } from '../../contexts/meta/metadata.json'
-const metadata = JSON.parse(JSON.stringify(themd))   
+//import { themd } from '../../contexts/meta/metadata.json'
+//const metadata = JSON.parse(JSON.stringify(themd))   
 
 const { Content } = Layout;
 
@@ -59,7 +59,7 @@ let minters = []
 let referrers = []
 let results = {'BadMale': 0, 'Male': 0, 'Female': 0, 'BadFemale': 0, 'Dagron': 0, 'Slime': 0}
 export const ArtworksView = () => {
-
+const { metadata, isLoading } = useMeta();
      const wallet = useWallet();
   const connection = useConnection();
   const { connected, publicKey } = useWallet();
