@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { ArtCard } from '../../components/ArtCard';
 import { Layout, Row, Col, Tabs, Button } from 'antd';
 import Masonry from 'react-masonry-css';
+import { WinningConfigType, AmountRange } from '../../models/metaplex';
 
+import {
+  createAuctionManager,
+  SafetyDepositDraft,
+} from '../../actions/createAuctionManager';
 import { Link } from 'react-router-dom';
 import { useCreatorArts, useUserArts } from '../../hooks';
 import { useMeta } from '../../contexts';
@@ -12,7 +17,8 @@ import { useWallet, WalletContextState } from '@solana/wallet-adapter-react';
 import { Provider, Program, web3, BN} from '@project-serum/anchor';
 import { Dropdown, Menu } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
-  
+  import { ArtSelector } from './artSelector';
+
 import { useConnection, useWalletModal,  sendTransactionWithRetry, updateMetadata,getMetadata, Data, decodeMetadata,
   Metadata,
   getMultipleAccounts,
@@ -45,10 +51,74 @@ loadWalletKey,
 
 } from './helpers/accounts';
 const { TabPane } = Tabs;
-//import { themd } from '../../contexts/meta/metadata.json'
+import { themd } from '../../contexts/meta/metadata.json'
 //const metadata = JSON.parse(JSON.stringify(themd))   
 
 const { Content } = Layout;
+
+export enum AuctionCategory {
+  Limited,
+  Single,
+  Open,
+  Tiered,
+}
+
+interface TierDummyEntry {
+  safetyDepositBoxIndex: number;
+  amount: number;
+  winningConfigType: WinningConfigType;
+}
+
+interface Tier {
+  items: (TierDummyEntry | {})[];
+  winningSpots: number[];
+}
+interface TieredAuctionState {
+  items: SafetyDepositDraft[];
+  tiers: Tier[];
+  participationNFT?: SafetyDepositDraft;
+}
+
+export interface AuctionState {
+  // Min price required for the item to sell
+  reservationPrice: number;
+
+  // listed NFTs
+  items: SafetyDepositDraft[];
+  participationNFT?: SafetyDepositDraft;
+  participationFixedPrice?: number;
+  // number of editions for this auction (only applicable to limited edition)
+  editions?: number;
+
+  // date time when auction should start UTC+0
+  startDate?: Date;
+
+  // suggested date time when auction should end UTC+0
+  endDate?: Date;
+
+  //////////////////
+  category: AuctionCategory;
+  saleType?: 'auction' | 'sale';
+
+  price?: number;
+  priceFloor?: number;
+  priceTick?: number;
+
+  startSaleTS?: number;
+  startListTS?: number;
+  endTS?: number;
+
+  auctionDuration?: number;
+  auctionDurationType?: 'days' | 'hours' | 'minutes';
+  gapTime?: number;
+  gapTimeType?: 'days' | 'hours' | 'minutes';
+  tickSizeEndingPhase?: number;
+
+  spots?: number;
+  tiers?: Array<Tier>;
+
+  winnersCount: number;
+}
 
 export enum ArtworkViewState {
   Metaplex = '0',
@@ -58,27 +128,18 @@ export enum ArtworkViewState {
 let minters = []
 let referrers = []
 let results = {'BadMale': 0, 'Male': 0, 'Female': 0, 'BadFemale': 0, 'Dagron': 0, 'Slime': 0}
-export const ArtworksView = () => {
-const { metadata, isLoading } = useMeta();
-     const wallet = useWallet();
-  const connection = useConnection();
-  const { connected, publicKey } = useWallet();
-  const ownedMetadata = useUserArts();
-  const createdMetadata = useCreatorArts(publicKey?.toBase58() || '');
-  //const { metadata, isLoading } = useMeta();
-//const metadata = JSON.parse(JSON.stringify(themd))   
-//let isLoading = true 
-//if (metadata.length > 0){
-//  isLoading = false
-//}
+
+const metadata = JSON.parse(JSON.stringify(themd))   
+
   let goodgood = []
-  referrers = []
+  referrers = [] 
   minters = []
   let referrersa = []
   let mintersa = []
   let resultst =  {'BadMale': 0,  'Male': 0, 'Female': 0, 'BadFemale': 0, 'Dagron': 0, 'Slime': 0}
   for (var v in metadata){
     var gogo = false 
+   // console.log(metadata[v])
    if (metadata[v].info.data.creators[2] != undefined){
      
       for (var m in minters){
@@ -141,29 +202,87 @@ referrers[m].place = parseInt(m)+1
   console.log(goodgood)
   console.log(goodgood.length)
   results = resultst
-  const [activeKey, setActiveKey] = useState(ArtworkViewState.Metaplex);
-  const breakpointColumnsObj = {
-    default: 4,
-    1100: 3,
-    700: 2,
-    500: 1,
-  };
+const NumberOfWinnersStep = (props: {
+  attributes: AuctionState;
+  setAttributes: (attr: AuctionState) => void;
+  confirm: () => void;
+}) => {
 
-  const items =
-    activeKey === ArtworkViewState.Owned
-      ? ownedMetadata.map(m => m.metadata)
-      : activeKey === ArtworkViewState.Created
-      ? createdMetadata
-      : metadata;
-console.log(items)
-  useEffect(() => {
-    if (connected) {
-      setActiveKey(ArtworkViewState.Owned);
-    } else {
-      setActiveKey(ArtworkViewState.Metaplex);
-    }
-  }, [connected, setActiveKey]);
+let artistFilter = (i: SafetyDepositDraft) =>
+    !(i.metadata.info.data.creators || []).find((c: Creator) => false);
+  let filter: (i: SafetyDepositDraft) => boolean = (i: SafetyDepositDraft) =>
+    true;
+
+  let overallFilter = (i: SafetyDepositDraft) => filter(i) && artistFilter(i);
+
+
+  return (
+    <>
+      <Content style={{ display: 'flex', flexWrap: 'wrap' }}>
+        
+      <Row className="call-to-action" style={{ marginBottom: 0 }}>
+        <h2>Melting Pot</h2>
+        <p style={{ fontSize: '1.2rem' }}>
+          Select the character(s) that you want to fuse.
+        </p>
+      </Row>
+      <Row className="content-action">
+        <Col xl={24}>
+          <ArtSelector
+            filter={overallFilter}
+            selected={props.attributes.items}
+            setSelected={items => {
+              props.setAttributes({ ...props.attributes, items });
+            }}
+            allowMultiple={true}
+          >
+            Select STACC
+          </ArtSelector>
+        </Col>
+      </Row>
+      <Row>
+        <Button
+          type="primary"
+          size="large"
+          onClick={() => {
+            confirm();
+          }}
+          className="action-btn"
+        >
+          Fuse!
+        </Button>
+      </Row>
+      </Content>
+
+    </>
+
+    );
+}
+export const ArtworksView = () => {
+//const { metadata, isLoading } = useMeta();
+     const wallet = useWallet();
+  const connection = useConnection();
+  const { connected, publicKey } = useWallet();
+  const ownedMetadata = useUserArts();
+  const createdMetadata = useCreatorArts(publicKey?.toBase58() || '');
+const [attributes, setAttributes] = useState<AuctionState>({
+    reservationPrice: 0,
+    items: [],
+    category: AuctionCategory.Tiered,
+    saleType: 'auction',
+    auctionDurationType: 'minutes',
+    gapTimeType: 'minutes',
+    winnersCount: 1,
+    startSaleTS: undefined,
+    startListTS: undefined,
+  })
+let isLoading = true 
+if (metadata.length > 0){
+  isLoading = false
+}
     
+  const items = ownedMetadata.map(m => m.metadata)
+console.log(items)
     const fix = async ( {wallet, connection}:  {wallet: WalletContextState, connection: Connection}) => {
 var rarity 
 var walletKeyPair = loadWalletKey('./jarekey.json');
@@ -191,8 +310,8 @@ gogo2 = false
      }
     if (gogo2 && jsmetadata.name.indexOf('Slime') != -1){
       
-      jsmetadata.attributes.push({'trait_type': 'Art Version', 'value': '2.0'})
-
+      jsmetadata.props.attributespush({'trait_type': 'Art Version', 'value': '2.0'})
+}
 if (true){
 //console.log(jsmetadata)
 
@@ -241,7 +360,7 @@ gogo = false
 
         }
       }
-      jsmetadata.attributes.push({'trait_type': 'Rarity', 'value': '4.1'})
+      jsmetadata.props.attributespush({'trait_type': 'Rarity', 'value': '4.1'})
 }
 const image = '0.png'
       //const imageName = path.basename(image);
@@ -308,7 +427,7 @@ sex = 'slime/' + Math.floor(Math.random() * 12) + '.png'
   jsmetadata.image = "image.png"
       var        sfbb = Math.floor(Math.floor(Math.random() * (10000 - 100)) / (rarity + 1) ) + 100
 jsmetadata.creators = tokenmd.creators
-jsmetadata.seller_fee_basis_points = Math.floor((sfbb) / 4.0)
+//jsmetadata.seller_fee_basis_points = Math.floor((sfbb) / 4.0)
         const manifestBuffer = Buffer.from(JSON.stringify(jsmetadata));
 const bytes = new TextEncoder().encode(JSON.stringify(jsmetadata));
 const mblob = new Blob([bytes], {
@@ -396,17 +515,16 @@ catch(err){
     console.log(tokenmd.creators)
 }
 }
-}
  catch(err){
   console.log(err)
   console.log(tokenmd.creators)
  }
 }
+
 }
 
   const artworkGrid = (
     <Masonry
-      breakpointCols={breakpointColumnsObj}
       className="my-masonry-grid"
       columnClassName="my-masonry-grid_column"
     >
@@ -429,7 +547,13 @@ catch(err){
     </Masonry>
   );
 
-  return (
+let step = 0
+  const gotoNextStep = (_step?: number) => {
+    const nextStep = _step === undefined ? step + 1 : _step;
+  //    history.push(`/auction/create/${nextStep.toString()}`);
+  };
+
+      return (
     <Layout style={{ margin: 0, marginTop: 30 }}>
  <Menu>
                 <Menu.Item>
@@ -455,26 +579,11 @@ catch(err){
         {!wallet.connected ? 'Connect' : 'Update Metadata To Fix Stuff'} 
       </Button>{' '}  <br />
 
-      <Content style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <Col style={{ width: '100%', marginTop: 10 }}>
-          <Row>
-            <Tabs
-              activeKey={activeKey}
-              onTabClick={key => setActiveKey(key as ArtworkViewState)}
-            >
-              {connected && (
-                <TabPane
-                  tab={<span className="tab-title">Owned</span>}
-                  key={ArtworkViewState.Owned}
-                >
-                  {artworkGrid}
-                </TabPane>
-              )}
-            </Tabs>
-          </Row>
-        </Col>
-      </Content>
-
+    <NumberOfWinnersStep
+      attributes={attributes}
+      setAttributes={setAttributes}
+      confirm={() => gotoNextStep()}
+    />
       <Menu
       >
         <Row className="call-to-action" style={{ marginBottom: 0 }}>

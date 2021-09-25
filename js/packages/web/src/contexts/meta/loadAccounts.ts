@@ -161,7 +161,6 @@ export const loadAccounts = async (connection: Connection, all: boolean) => {
 
         for (let i = 0; i < MAX_CREATOR_LIMIT; i++) {
           for (let j = 0; j < whitelistedCreators.length; j++) {
-            if (whitelistedCreators[j].info.address != "C5ruRv8VMhLL4WuSVH8jKFGBtbSUQCfFvbojKh7UfXq4"){
             additionalPromises.push(
               getProgramAccounts(connection, METADATA_PROGRAM_ID, {
                 filters: [
@@ -188,7 +187,6 @@ export const loadAccounts = async (connection: Connection, all: boolean) => {
               }).then(forEach(processMetaData)),
             );
           }
-          }
         }
       }
     }),
@@ -199,7 +197,7 @@ export const loadAccounts = async (connection: Connection, all: boolean) => {
   await postProcessMetadata(tempCache, all);
   console.log('Metadata size', tempCache.metadata.length);
 
-  if (additionalPromises.length > 0) {
+  if (false) {
     console.log('Pulling editions for optimized metadata');
     let setOf100MetadataEditionKeys: string[] = [];
     const editionPromises: Promise<{

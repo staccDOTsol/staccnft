@@ -19,7 +19,9 @@ import { themd } from './../contexts/meta/metadata.json';
 
 export const useUserArts = (): SafetyDepositDraft[] => {
 const { metadata, masterEditions, editions } = useMeta();
-
+//const masterEditions = []
+//const editions = []
+//const metadata = JSON.parse(JSON.stringify(themd))   
   const { userAccounts } = useUserAccounts();
   const accountByMint = userAccounts.reduce((prev, acc) => {
     prev.set(acc.info.mint.toBase58(), acc);

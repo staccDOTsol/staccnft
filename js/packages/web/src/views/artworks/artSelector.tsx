@@ -47,7 +47,6 @@ export const ArtSelector = (props: ArtSelectorProps) => {
     700: 2,
     500: 1,
   };
-
   return (
     <>
       <Masonry
@@ -90,10 +89,8 @@ export const ArtSelector = (props: ArtSelectorProps) => {
         footer={null}
       >
         <Row className="call-to-action" style={{ marginBottom: 0 }}>
-          <h2>Select the NFT you want to sell</h2>
-          <p style={{ fontSize: '1.2rem' }}>
-            Select the NFT that you want to sell copy/copies of.
-          </p>
+          <h2>Select the 2+ STACCs you want to fuse</h2>
+          
         </Row>
         <Row
           className="content-action"
