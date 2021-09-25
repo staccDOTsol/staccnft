@@ -868,17 +868,8 @@ aaaaa()
       <br />
       <br /></div>
 
-<div className="info-header">Hey! Check Medium for info, join Discord for more details. DYOR.market coming..._soon_</div>
+<div className="info-header">TWO sales SOLT OUT! ~1920 of 4000 minted in this generation! NEXT SALE MONDAY!</div>
 
-<Button type="primary" style={{visibility: shouldHide ? 'visible' : 'hidden' }} className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { mint('dagron', {wallet, connection})}}}>
-      
-        {!wallet.connected ? 'Connect' : 'Mint Dagron: 0 $SOL (+ about 0.044 fees, min. 4 tx)'} 
-      </Button>{' '}<br />
-<Button type="primary" style={{visibility: shouldHidef ? 'visible' : 'hidden' }} className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { mint('slime', {wallet, connection})}}}>
-      
-        {!wallet.connected ? 'Connect' : 'Mint Slime: 0 $SOL (+ about 0.044 fees, min 4 tx)'} 
-      </Button>{' '}
-      <br />
 
 
     </Layout>
