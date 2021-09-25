@@ -869,10 +869,7 @@ aaaaa()
       <br /></div>
 
 <div className="info-header">Hey! Check Medium for info, join Discord for more details. DYOR.market coming..._soon_</div>
-<Button type="primary" style={{visibility: shouldHide ? 'visible' : 'hidden' }} className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { mint2({wallet, connection})}}}>
-      
-        {!wallet.connected ? 'Connect' : 'Mint Almost OG #SlimeGang OR Almost OG #DagronKnight: 0.033 $SOL (only 1 tx of fees)'} 
-      </Button>{' '}<br />
+
 <Button type="primary" style={{visibility: shouldHide ? 'visible' : 'hidden' }} className="app-btn" onClick={ function(){  if (!wallet.connected){ wallet.connect() } else { mint('dagron', {wallet, connection})}}}>
       
         {!wallet.connected ? 'Connect' : 'Mint Dagron: 0 $SOL (+ about 0.044 fees, min. 4 tx)'} 
